@@ -44,11 +44,20 @@
 <node CREATED="1511021616279" ID="ID_1550495647" MODIFIED="1511021630444" TEXT="Rozumiesz, co tak naprawd&#x119; si&#x119; dzieje, kiedy robisz buildy itp"/>
 <node CREATED="1511631895105" ID="ID_1811894841" MODIFIED="1511631983140" TEXT="U&#x17c;ywa&#x142;em i tak wielu program&#xf3;w z konsoli (ansible, terraform, ptpython). Teraz mam &#x15b;rodowisko zintegrowane ze wszystkim."/>
 <node CREATED="1511631990137" ID="ID_1393844905" MODIFIED="1511632028252" TEXT="Nie chcia&#x142;o mi si&#x119; czeka&#x107; na wstanie IDE jak edytowa&#x142;em ma&#x142;e pliki, albo jak robi&#x142;em ma&#x142;e zmiany w kilku projektach."/>
+<node CREATED="1511635013573" ID="ID_664869037" MODIFIED="1511635020705" TEXT="Minusy">
 <node CREATED="1511021631797" ID="ID_1907068219" MODIFIED="1511630793629" TEXT="Nie nadaje si&#x119; do wszystkiego">
 <node CREATED="1511021653638" ID="ID_1756550722" MODIFIED="1511021656736" TEXT="Przegl&#x105;darka"/>
 <node CREATED="1511021647652" ID="ID_1079713419" MODIFIED="1511021651903" TEXT="Mind mapa"/>
 <node CREATED="1511021657201" ID="ID_78225732" MODIFIED="1511021659526" TEXT="Filmy"/>
 <node CREATED="1511021641922" ID="ID_1895422566" MODIFIED="1511630976223" TEXT="Wizualny diff"/>
+</node>
+<node CREATED="1511635026885" ID="ID_1678061491" MODIFIED="1511635037817" TEXT="R&#xf3;&#x17c;ne implementacje terminali">
+<node CREATED="1511635039581" ID="ID_1225529443" MODIFIED="1511635047336" TEXT="Nie wszystko robi&#x105; w ten sam spos&#xf3;b"/>
+<node CREATED="1511635052413" ID="ID_1026559190" MODIFIED="1511635091536" TEXT="Niekt&#xf3;re po&#x142;&#x105;czenia mog&#x105; mie&#x107; konflikty przez bugi">
+<node CREATED="1511635092476" ID="ID_1799959107" MODIFIED="1511635103552" TEXT="Bugi s&#x105; naprawiane jak kto&#x15b; je znajdzie"/>
+<node CREATED="1511635106971" ID="ID_492085809" MODIFIED="1511635115207" TEXT="Np. neovim + konsole + tmux"/>
+</node>
+</node>
 </node>
 </node>
 <node CREATED="1511631172525" ID="ID_1115458077" MODIFIED="1511631184079" POSITION="right" TEXT="Plan prezentacji">
@@ -102,8 +111,15 @@
 <node CREATED="1511633954008" ID="ID_663309308" MODIFIED="1511633967148" TEXT="Spellcheck w&#x142;&#x105;czany / wy&#x142;&#x105;czany na skr&#xf3;t"/>
 <node CREATED="1511634044231" ID="ID_121712228" MODIFIED="1511634062049" TEXT="Ranger i bash/fish z darkul&#x105; i 256 kolorami?"/>
 <node CREATED="1511634143237" ID="ID_1243334430" MODIFIED="1511634170480" TEXT="Przejd&#x17a; przez config i dodaj do &quot;do pokazania&quot; wszystkie tricki tam zawarte."/>
+<node CREATED="1511634484215" ID="ID_1829850818" MODIFIED="1511634501834" TEXT="Co inni ludzie miewaj&#x105; w vimrc? Ustawieniach neovima?"/>
+<node CREATED="1511634924950" ID="ID_1082471736" MODIFIED="1511634937027" TEXT="Jak wypada Pycharm z IdeaVim w por&#xf3;wnaniu?"/>
 </node>
 <node CREATED="1511632671562" ID="ID_1095140654" MODIFIED="1511632680718" TEXT="Do pokazania">
+<node CREATED="1511634875472" ID="ID_891616797" MODIFIED="1511634888961" TEXT="&#x141;&#x105;czenie ruchy z operacj&#x105;">
+<node CREATED="1511634895015" ID="ID_1164235465" MODIFIED="1511634896795" TEXT="ciw"/>
+<node CREATED="1511634897431" ID="ID_1589370359" MODIFIED="1511634900115" TEXT="dw"/>
+<node CREATED="1511634903031" ID="ID_624981295" MODIFIED="1511634907595" TEXT="ci&apos;"/>
+</node>
 <node CREATED="1511632683049" ID="ID_1756251469" MODIFIED="1511633068341" TEXT="znajdowanie referencji"/>
 <node CREATED="1511632695898" ID="ID_1104048035" MODIFIED="1511632713445" TEXT="przej&#x15b;cie do definicji"/>
 <node CREATED="1511632722138" ID="ID_783472620" MODIFIED="1511632729629" TEXT="bufory zamiast tab&#xf3;w">
@@ -117,7 +133,33 @@
 <node CREATED="1511634195620" ID="ID_1307492488" MODIFIED="1511634211800" TEXT="Potrzebny NeoVim albo vim-gtk"/>
 </node>
 <node CREATED="1511634102750" ID="ID_233129788" MODIFIED="1511634123561" TEXT="Jest wiele bufor&#xf3;w do przeklejania/wycinania itp. Nie trzeba sobie nadpisywa&#x107; wszystkiego."/>
-<node CREATED="1511634136181" ID="ID_281637160" MODIFIED="1511634136181" TEXT=""/>
+<node CREATED="1511634136181" ID="ID_281637160" MODIFIED="1511634343766" TEXT="Moc kropki"/>
+<node CREATED="1511634370449" ID="ID_59179063" MODIFIED="1511634382541" TEXT="Vimgrep do szukania w projekcie, podpi&#x119;cie tego pod skr&#xf3;t."/>
+<node CREATED="1511634387057" ID="ID_1676659907" MODIFIED="1511634405340" TEXT="Ctrl+spacja &#x17c;eby dosta&#x107; tylko konkretne podpiwiedzi z Jedi">
+<node CREATED="1511634406512" ID="ID_1437584962" MODIFIED="1511634427252" TEXT="YouComplete daje fuzzy podpowiedzi, kt&#xf3;re cz&#x119;sto s&#x105; bardzo przydatne"/>
+</node>
+<node CREATED="1511634447047" ID="ID_1580770658" MODIFIED="1511634467731" TEXT="Zamiast przesuwa&#x107; funkcj&#x119; w g&#xf3;r&#x119; i w d&#xf3;&#x142; mo&#x17c;na j&#x105; &#x142;atwo wyci&#x105;&#x107; i wklei&#x107; gdzie&#x15b; indziej."/>
+<node CREATED="1511634846624" ID="ID_1311644189" MODIFIED="1511634855620" TEXT="Search and replace w zaznaczonym zakresie"/>
+<node CREATED="1511634856416" ID="ID_204064491" MODIFIED="1511634874972" TEXT="nawigacja do zamkni&#x119;cia, otwarcia nawiasu"/>
+<node CREATED="1511634513782" ID="ID_1302949037" MODIFIED="1511634518002" TEXT="Uczenie si&#x119; Vima">
+<node CREATED="1511634519238" ID="ID_38848533" MODIFIED="1511634524898" TEXT="Przej&#x15b;cie Vimtutora"/>
+<node CREATED="1511634525486" ID="ID_1363894525" MODIFIED="1511634530490" TEXT="Czytanie manuala"/>
+<node CREATED="1511634533134" ID="ID_1270472047" MODIFIED="1511634541305" TEXT="Przerzucenie si&#x119; na niego w pracy">
+<node CREATED="1511634542414" ID="ID_584795981" MODIFIED="1511634550057" TEXT="Na pocz&#x105;tku b&#x119;dzie wolniej i bole&#x15b;nie"/>
+</node>
+<node CREATED="1511634551262" ID="ID_1197990020" MODIFIED="1511634570714" TEXT="Nauka poprawnego pisania na klawiaturze">
+<node CREATED="1511634572053" ID="ID_61723020" MODIFIED="1511634576489" TEXT="Dobre trzymanie palc&#xf3;w"/>
+<node CREATED="1511634576885" ID="ID_1196984301" MODIFIED="1511634591512" TEXT="Umiej&#x119;tno&#x15b;&#x107; uniwersalna, przydaje si&#x119; wsz&#x119;dzie"/>
+</node>
+</node>
+<node CREATED="1511634640236" ID="ID_747842917" MODIFIED="1511634971130" TEXT="Rozwijanie / bugi">
+<node CREATED="1511634648620" ID="ID_1700572141" MODIFIED="1511634657703" TEXT="Czasem s&#x105; bugi"/>
+<node CREATED="1511634658339" ID="ID_641100327" MODIFIED="1511634680406" TEXT="Jak jeste&#x15b; hardcorem, to mo&#x17c;esz te bugi rozwi&#x105;za&#x107;, albo doda&#x107; feature"/>
+<node CREATED="1511634681364" ID="ID_513745278" MODIFIED="1511634695663" TEXT="W Neovimie piszesz pluginy w dowolnym j&#x119;zyku">
+<node CREATED="1511634705379" ID="ID_1441636148" MODIFIED="1511634717574" TEXT="W Vimie chyba tylko Vimscript i Python?"/>
+<node CREATED="1511634720154" ID="ID_1842167422" MODIFIED="1511634734302" TEXT="W Pycharmie (i intellij) tylko Java"/>
+</node>
+</node>
 </node>
 </node>
 </node>

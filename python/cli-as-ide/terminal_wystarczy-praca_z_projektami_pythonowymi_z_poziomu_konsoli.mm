@@ -2,11 +2,21 @@
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1511017570130" ID="ID_59680098" MODIFIED="1511021286344" TEXT="Praca w konsoli na przyk&#x142;adzie faktycznego commitu">
 <node CREATED="1511019466467" ID="ID_1059965362" MODIFIED="1511019487308" POSITION="right" TEXT="Robota do zrobienia">
-<node CREATED="1511021447342" ID="ID_1560050008" MODIFIED="1511021458392" TEXT="Jak si&#x119; zdecydowa&#x107;, co to ma by&#x107;?">
-<node CREATED="1511021709913" ID="ID_352744740" MODIFIED="1511021715736" TEXT="Przejrzyj wszystkie notki"/>
+<node CREATED="1511021447342" ID="ID_1560050008" MODIFIED="1511635704643" TEXT="Co ma by&#x107; w prezentacji?">
+<node CREATED="1511021709913" ID="ID_352744740" MODIFIED="1511638510863" TEXT="Przejrzyj wszystkie notki">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1511635714512" ID="ID_1990382371" MODIFIED="1511635721308" TEXT="Tytu&#x142;owy slajd w toilecie?"/>
+<node CREATED="1511635798284" ID="ID_1859243959" MODIFIED="1511638087833" TEXT="Aliasy!">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1511636237225" ID="ID_532700164" MODIFIED="1511636245852" TEXT="Aplikacja pokazuj&#x105;ca co wciskam?"/>
+<node CREATED="1511636246337" ID="ID_294275739" MODIFIED="1511636257877" TEXT="Inny terminal, &#x17c;eby przybli&#x17c;anie w Neovimie dzia&#x142;a&#x142;o?"/>
 </node>
 <node CREATED="1511631372176" ID="ID_1007858332" MODIFIED="1511631393108" TEXT="Odznaczaj ogarni&#x119;te elementy tego drzewa">
-<node CREATED="1511631394681" ID="ID_1904463289" MODIFIED="1511631404548" TEXT="Ptaszek na zawarte"/>
+<node CREATED="1511631394681" ID="ID_1904463289" MODIFIED="1511638111847" TEXT="Ptaszek na zawarte">
+<icon BUILTIN="button_ok"/>
+</node>
 <node CREATED="1511631406489" ID="ID_1477009413" MODIFIED="1511631419501" TEXT="Krzy&#x17c;yk na odrzucone"/>
 </node>
 <node CREATED="1511021055611" ID="ID_1622279434" MODIFIED="1511021515404" TEXT="zamie&#x15b;&#x107; gdzie&#x15b; t&#x119; map&#x119; i configi do wszystkich narz&#x119;dzi">
@@ -15,33 +25,87 @@
 </node>
 </node>
 <node CREATED="1511019490393" ID="ID_1916535455" MODIFIED="1511021086595" TEXT="Narz&#x119;dzia do pokazania">
-<node CREATED="1511021089898" ID="ID_1201074486" MODIFIED="1511021099096" TEXT="Tmux"/>
-<node CREATED="1511021105315" ID="ID_16674722" MODIFIED="1511021107147" TEXT="Ranger"/>
-<node CREATED="1511021108076" ID="ID_1666115729" MODIFIED="1511021109379" TEXT="VIM"/>
-<node CREATED="1511021110374" ID="ID_642236478" MODIFIED="1511021113746" TEXT="tox"/>
-<node CREATED="1511021114442" ID="ID_1583638695" MODIFIED="1511021116505" TEXT="pytest"/>
-<node CREATED="1511021125501" ID="ID_1834277194" MODIFIED="1511021127452" TEXT="pudb"/>
+<node CREATED="1511021108076" ID="ID_1666115729" MODIFIED="1511638021218" TEXT="VIM"/>
+<node CREATED="1511021105315" ID="ID_16674722" MODIFIED="1511638023442" TEXT="Ranger">
+<node CREATED="1511638024784" ID="ID_1297549802" MODIFIED="1511638030092" TEXT="vimowe bindingi!"/>
+</node>
+<node CREATED="1511021089898" ID="ID_1201074486" MODIFIED="1511021099096" TEXT="Tmux">
+<node CREATED="1511638032248" ID="ID_1512400389" MODIFIED="1511638038676" TEXT="Zrobi&#x142;em sobie vimowe bindingi"/>
+</node>
+<node CREATED="1511637963536" ID="ID_274830966" MODIFIED="1511638046243" TEXT="bash">
+<node CREATED="1511637969624" ID="ID_625321504" MODIFIED="1511637974988" TEXT="Vimowe bindingi!"/>
+</node>
+<node CREATED="1511638157713" ID="ID_203625766" MODIFIED="1511638164947" TEXT="fish?"/>
+<node CREATED="1511637997408" ID="ID_869912212" MODIFIED="1511638054308" TEXT="less">
+<node CREATED="1511638000016" ID="ID_1297938715" MODIFIED="1511638011900" TEXT="tylko po to, &#x17c;eby pokaza&#x107;, &#x17c;e s&#x105; vimowe bindingi"/>
+</node>
+<node CREATED="1511021114442" ID="ID_1583638695" MODIFIED="1511638057755" TEXT="pytest">
+<node CREATED="1511637714233" ID="ID_271886990" MODIFIED="1511637722596" TEXT="Odpalanie wybranego testu"/>
+<node CREATED="1511637725417" ID="ID_1727586589" MODIFIED="1511637733668" TEXT="Odpalenie tylko unit test&#xf3;w"/>
+</node>
+<node CREATED="1511021110374" ID="ID_642236478" MODIFIED="1511021113746" TEXT="tox">
+<node CREATED="1511637735928" ID="ID_36033348" MODIFIED="1511637742612" TEXT="Pe&#x142;ne testy"/>
+<node CREATED="1511637744792" ID="ID_381743530" MODIFIED="1511637751460" TEXT="Tylko puszczenie pylinta"/>
+</node>
+<node CREATED="1511021125501" ID="ID_1834277194" MODIFIED="1511021127452" TEXT="pudb">
+<node CREATED="1511637759608" ID="ID_868788189" MODIFIED="1511637763572" TEXT="Zwyk&#x142;y debug"/>
+<node CREATED="1511637764592" ID="ID_1422733738" MODIFIED="1511637768963" TEXT="Debug testu"/>
+<node CREATED="1511637981424" ID="ID_1900654317" MODIFIED="1511637989652" TEXT="Te&#x17c; z grubsza vimowe bindingi"/>
+</node>
+<node CREATED="1511637409641" ID="ID_480161739" MODIFIED="1511637411972" TEXT="git">
+<node CREATED="1511637809905" ID="ID_1922057124" MODIFIED="1511637821660" TEXT="Diffowanie normalnie"/>
+<node CREATED="1511637832464" ID="ID_1290735121" MODIFIED="1511637842612" TEXT="Pokazywanie co si&#x119; dzia&#x142;o w poszczeg&#xf3;lnych commitach">
+<node CREATED="1511637844304" ID="ID_319919573" MODIFIED="1511637868468" TEXT="Log, &#x17c;eby wy&#x15b;wietli&#x107;"/>
+<node CREATED="1511637856136" ID="ID_1700918478" MODIFIED="1511637862372" TEXT="Show poszczeg&#xf3;lnych"/>
+</node>
+<node CREATED="1511637622024" ID="ID_1111799216" MODIFIED="1511637636388" TEXT="Por&#xf3;wnywanie pliku do wersji z innego commitu."/>
+<node CREATED="1511637637904" ID="ID_16662071" MODIFIED="1511637647228" TEXT="Podmiana pliku na wersj&#x119; z innego commitu. "/>
+<node CREATED="1511637649520" ID="ID_479812434" MODIFIED="1511637657284" TEXT="Pokazanie dw&#xf3;ch drzew commit&#xf3;w"/>
+</node>
 <node CREATED="1511021128673" ID="ID_1186835724" MODIFIED="1511021132888" TEXT="pgcli">
 <node CREATED="1511021137922" ID="ID_792676511" MODIFIED="1511021152860" TEXT="mo&#x17c;na te&#x17c; wspomnie&#x107;, &#x17c;e s&#x105; takie narz&#x119;dzia do innych baz"/>
+<node CREATED="1511637669528" ID="ID_1765376116" MODIFIED="1511637683972" TEXT="&#x141;&#x105;czenie si&#x119; z aliasem do bazy z docker compose"/>
+<node CREATED="1511637686225" ID="ID_12580203" MODIFIED="1511637699955" TEXT="&#x141;&#x105;czenie si&#x119; przez tunelowanie SSH do bazy w klastrze."/>
+<node CREATED="1511638475400" ID="ID_1394534113" MODIFIED="1511638484852" TEXT="Wciskasz v i masz edycj&#x119; w neovimie!"/>
 </node>
-<node CREATED="1511631630226" ID="ID_1657220637" MODIFIED="1511631633861" TEXT="meld"/>
+<node CREATED="1511631630226" ID="ID_1657220637" MODIFIED="1511631633861" TEXT="meld">
+<node CREATED="1511637793673" ID="ID_36662197" MODIFIED="1511637804116" TEXT="Por&#xf3;wnywania rzeczy przed commitem"/>
+</node>
+<node CREATED="1511637179881" ID="ID_1047264878" MODIFIED="1511637183533" TEXT="grep"/>
+<node CREATED="1511637184257" ID="ID_684304202" MODIFIED="1511637185501" TEXT="find"/>
+<node CREATED="1511637192121" ID="ID_18872853" MODIFIED="1511637195077" TEXT="xargs"/>
+</node>
+<node CREATED="1511637902288" ID="ID_1284080072" MODIFIED="1511637906955" TEXT="Forma prezentacji">
+<node CREATED="1511637909576" ID="ID_1279026203" MODIFIED="1511637917260" TEXT="Pokazanie wszystkiego po kolei?"/>
+<node CREATED="1511635674430" ID="ID_1658765601" MODIFIED="1511635677074" TEXT="Mo&#x17c;e na pocz&#x105;tek zrobi&#x107; demko, jak szybko mog&#x119; napisa&#x107; prost&#x105; aplikacyjk&#x119; HTTP z testem i je odpali&#x107;? To powinno zrobi&#x107; zajawk&#x119;."/>
+<node CREATED="1511637373833" ID="ID_327461352" MODIFIED="1511637390365" TEXT="Przyk&#x142;adowy workflow robienia patcha od pocz&#x105;tku do ko&#x144;ca?"/>
 </node>
 </node>
 <node CREATED="1511021291938" ID="ID_823891076" MODIFIED="1511021763405" POSITION="left" TEXT="narz&#x119;dzia do zrobienia tej prezentacji">
 <node CREATED="1511021307328" ID="ID_1494907374" MODIFIED="1511021318112" TEXT="pewnie co&#x15b; w stylu toilet i python"/>
 <node CREATED="1511021323485" ID="ID_1814247079" MODIFIED="1511021329594" TEXT="freemind">
 <node CREATED="1511021343079" ID="ID_1586476694" MODIFIED="1511021357653" TEXT="&#x142;adnie mo&#x17c;na go u&#x17c;ywa&#x107; z klawiatury"/>
-<node CREATED="1511021359128" ID="ID_1426225525" MODIFIED="1511021388067" TEXT="&#x142;atwiej mo&#x17c;na go odpali&#x107; ni&#x17c; xmind"/>
-<node CREATED="1511021388870" ID="ID_52605028" MODIFIED="1511021396307" TEXT="brzydszy ni&#x17c; xmind"/>
+<node CREATED="1511021768502" ID="ID_1975184325" MODIFIED="1511021808303" TEXT="kiedy&#x15b; my&#x15b;la&#x142;em, &#x17c;e mind mapy s&#x105; zbyt czasoch&#x142;onne i wcale nie s&#x105; lepsze ni&#x17c; od razu zacz&#x119;cie szkicowania slajd&#xf3;w"/>
+<node CREATED="1511637554048" ID="ID_666525274" MODIFIED="1511637557852" TEXT="vs Xmind">
+<node CREATED="1511021359128" ID="ID_1426225525" MODIFIED="1511637572597" TEXT="&#x142;atwiej mo&#x17c;na go odpali&#x107;"/>
+<node CREATED="1511021388870" ID="ID_52605028" MODIFIED="1511637575804" TEXT="brzydszy"/>
 <node CREATED="1511021396932" ID="ID_28683638" MODIFIED="1511021414430" TEXT="zostawia format plik&#xf3;w kt&#xf3;ry lepiej nadaje si&#x119; do Gita"/>
 </node>
-<node CREATED="1511021768502" ID="ID_1975184325" MODIFIED="1511021808303" TEXT="kiedy&#x15b; my&#x15b;la&#x142;em, &#x17c;e mind mapy s&#x105; zbyt czasoch&#x142;onne i wcale nie s&#x105; lepsze ni&#x17c; od razu zacz&#x119;cie szkicowania slajd&#xf3;w"/>
 </node>
-<node CREATED="1511021552951" ID="ID_554030902" MODIFIED="1511021557483" POSITION="right" TEXT="Czemu konsola?">
+</node>
+<node CREATED="1511631172525" ID="ID_1115458077" MODIFIED="1511638207264" POSITION="right" TEXT="Plan prezentacji">
+<node CREATED="1511638207256" ID="ID_1651415414" MODIFIED="1511638210971" TEXT="Wst&#x119;p">
+<node CREATED="1511638213992" ID="ID_1369114361" MODIFIED="1511638230636" TEXT="Prezentacja b&#x119;dzie szybka i b&#x119;dzie du&#x17c;o materia&#x142;u"/>
+<node CREATED="1511638231641" ID="ID_1169239327" MODIFIED="1511638241572" TEXT="Configi do wszystkiego s&#x105; na Githubie"/>
+<node CREATED="1511631450176" ID="ID_1946710202" MODIFIED="1511638243338" TEXT="Powiedz czemu w og&#xf3;le siedzie&#x107; w konsoli">
 <node CREATED="1511021559862" ID="ID_496616300" MODIFIED="1511632054676" TEXT="Mo&#x17c;esz sam wszystko &#x142;atwo &#x142;&#x105;czy&#x107; ze sob&#x105; jak ci si&#x119; podoba."/>
-<node CREATED="1511021587984" ID="ID_1066472959" MODIFIED="1511021611656" TEXT="Nabywasz umiej&#x119;tno&#x15b;ci uniwersalne, w przeciwie&#x144;stwie do zamykania si&#x119; w jakim&#x15b; IDE"/>
-<node CREATED="1511632064688" ID="ID_329801130" MODIFIED="1511632105763" TEXT="Nie jeste&#x15b; zdany na producent&#xf3;w IDE"/>
-<node CREATED="1511021616279" ID="ID_1550495647" MODIFIED="1511021630444" TEXT="Rozumiesz, co tak naprawd&#x119; si&#x119; dzieje, kiedy robisz buildy itp"/>
+<node CREATED="1511021587984" ID="ID_1066472959" MODIFIED="1511021611656" TEXT="Nabywasz umiej&#x119;tno&#x15b;ci uniwersalne, w przeciwie&#x144;stwie do zamykania si&#x119; w jakim&#x15b; IDE">
+<node CREATED="1511637320265" ID="ID_12413348" MODIFIED="1511637322197" TEXT="Skr&#xf3;ty VIMa prawie wsz&#x119;dzie dzia&#x142;aj&#x105; i s&#x105;&#xa0;wydajne. "/>
+</node>
+<node CREATED="1511632064688" ID="ID_329801130" MODIFIED="1511638420404" TEXT="Nie zamykasz si&#x119; w jakim&#x15b; IDE i jego ekosystemie">
+<node CREATED="1511638420920" ID="ID_1608279939" MODIFIED="1511638444228" TEXT="Pracujesz z ca&#x142;ym systemem stworzonym przez m&#x105;dro&#x15b;&#x107; przodk&#xf3;w"/>
+</node>
+<node CREATED="1511021616279" ID="ID_1550495647" MODIFIED="1511637336765" TEXT="Rozumiesz, co tak naprawd&#x119; si&#x119; dzieje, kiedy robisz buildy w CI, itp"/>
 <node CREATED="1511631895105" ID="ID_1811894841" MODIFIED="1511631983140" TEXT="U&#x17c;ywa&#x142;em i tak wielu program&#xf3;w z konsoli (ansible, terraform, ptpython). Teraz mam &#x15b;rodowisko zintegrowane ze wszystkim."/>
 <node CREATED="1511631990137" ID="ID_1393844905" MODIFIED="1511632028252" TEXT="Nie chcia&#x142;o mi si&#x119; czeka&#x107; na wstanie IDE jak edytowa&#x142;em ma&#x142;e pliki, albo jak robi&#x142;em ma&#x142;e zmiany w kilku projektach."/>
 <node CREATED="1511635013573" ID="ID_664869037" MODIFIED="1511635020705" TEXT="Minusy">
@@ -60,8 +124,7 @@
 </node>
 </node>
 </node>
-<node CREATED="1511631172525" ID="ID_1115458077" MODIFIED="1511631184079" POSITION="right" TEXT="Plan prezentacji">
-<node CREATED="1511631450176" ID="ID_1946710202" MODIFIED="1511631463548" TEXT="Powiedz czemu w og&#xf3;le siedzie&#x107; w konsoli"/>
+</node>
 <node CREATED="1511631196053" ID="ID_474511385" MODIFIED="1511631243050" TEXT="VIM jest spoko do pisania kodu">
 <node CREATED="1511631828178" ID="ID_1671329438" MODIFIED="1511631846396" TEXT="B&#x119;dzie kr&#xf3;tko o nim, bo b&#x119;dzie w innej prezentacji, bo za du&#x17c;y"/>
 <node CREATED="1511631247303" ID="ID_1832783099" MODIFIED="1511631258658" TEXT="Podpowiadanie"/>
@@ -82,9 +145,15 @@
 <node CREATED="1511631349408" ID="ID_1836335319" MODIFIED="1511631657950" TEXT="Tmux">
 <node CREATED="1511631659146" ID="ID_940963881" MODIFIED="1511631665534" TEXT="Dzielenie ekranu"/>
 <node CREATED="1511631666666" ID="ID_1584074807" MODIFIED="1511631682421" TEXT="Wiele okien"/>
-<node CREATED="1511631683290" ID="ID_1739443373" MODIFIED="1511631696398" TEXT="Przeklejanie tekstu mi&#x119;dzy Vimem, tmuxem, przegl&#x105;dark&#x105;"/>
+<node CREATED="1511631683290" ID="ID_1739443373" MODIFIED="1511631696398" TEXT="Przeklejanie tekstu mi&#x119;dzy Vimem, tmuxem, przegl&#x105;dark&#x105;">
+<node CREATED="1511636287170" ID="ID_200886108" MODIFIED="1511636292821" TEXT="Wymaga plugina do Tmuxa"/>
+<node CREATED="1511636295546" ID="ID_845516247" MODIFIED="1511636314038" TEXT="Wymaga Neovima lub vim-gtk3 i konfiguracji"/>
+</node>
 </node>
 <node CREATED="1511633701421" ID="ID_68156502" MODIFIED="1511633709489" TEXT="Ranger jako moje drzewo plik&#xf3;w"/>
+<node CREATED="1511638531480" ID="ID_643253892" MODIFIED="1511638534124" TEXT="Porady">
+<node CREATED="1511637494633" ID="ID_867771398" MODIFIED="1511637496044" TEXT="Poczytajcie manuale rzeczy kt&#xf3;rych u&#x17c;ywacie codziennie! (RTFM) "/>
+</node>
 </node>
 <node CREATED="1511632128600" ID="ID_184661180" MODIFIED="1511632143227" POSITION="left" TEXT="Praca z Vimem (miejsce na drug&#x105; prezentacj&#x119;)">
 <node CREATED="1511632659906" ID="ID_1452760141" MODIFIED="1511632668550" TEXT="TODO">
@@ -141,6 +210,7 @@
 <node CREATED="1511634447047" ID="ID_1580770658" MODIFIED="1511634467731" TEXT="Zamiast przesuwa&#x107; funkcj&#x119; w g&#xf3;r&#x119; i w d&#xf3;&#x142; mo&#x17c;na j&#x105; &#x142;atwo wyci&#x105;&#x107; i wklei&#x107; gdzie&#x15b; indziej."/>
 <node CREATED="1511634846624" ID="ID_1311644189" MODIFIED="1511634855620" TEXT="Search and replace w zaznaczonym zakresie"/>
 <node CREATED="1511634856416" ID="ID_204064491" MODIFIED="1511634874972" TEXT="nawigacja do zamkni&#x119;cia, otwarcia nawiasu"/>
+<node CREATED="1511637238481" ID="ID_1436252181" MODIFIED="1511637271581" TEXT="Powiedz, &#x17c;e IDE jest dobre, &#x17c;eby zobaczy&#x107;, co w og&#xf3;le mo&#x17c;na robi&#x107; z kodem i &#x17c;eby sobie wyrobi&#x107; wymagania."/>
 <node CREATED="1511634513782" ID="ID_1302949037" MODIFIED="1511634518002" TEXT="Uczenie si&#x119; Vima">
 <node CREATED="1511634519238" ID="ID_38848533" MODIFIED="1511634524898" TEXT="Przej&#x15b;cie Vimtutora"/>
 <node CREATED="1511634525486" ID="ID_1363894525" MODIFIED="1511634530490" TEXT="Czytanie manuala"/>

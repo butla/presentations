@@ -289,10 +289,6 @@
 <node CREATED="1511719839394" ID="ID_973305854" MODIFIED="1511779407056" TEXT="Ustawienie okien do tworzenia kodu">
 <icon BUILTIN="button_ok"/>
 <node CREATED="1511777287155" ID="ID_1643044464" MODIFIED="1511777300499" TEXT="Poka&#x17c;my sobie w ko&#x144;cu, jak mo&#x17c;na co&#x15b; robi&#x107; z kodem"/>
-<node CREATED="1511719891043" ID="ID_477120834" MODIFIED="1511719904766" TEXT="Na pokaz. &#x17b;eby zaprezentowa&#x107; styl pracy">
-<node CREATED="1511720476188" ID="ID_538778498" MODIFIED="1511720527673" TEXT="Jaka&#x15b; prosta rzecz licz&#x105;ca co&#x15b; bez dost&#x119;pu do bazy"/>
-<node CREATED="1511721206806" ID="ID_1391422473" MODIFIED="1511721221617" TEXT="Przygotuj sobie zawczasu ca&#x142;o&#x15b;&#x107; kodu na jakim&#x15b; branchu"/>
-</node>
 <node CREATED="1511720226727" ID="ID_542177727" MODIFIED="1511777389419" TEXT="Gdzie si&#x119; dodawa&#x142;o endpointy?">
 <node CREATED="1511720233487" ID="ID_1581698828" MODIFIED="1511781292660" TEXT="Grep do znalezienia &quot;add_route&quot;"/>
 <node CREATED="1511778643303" ID="ID_419076229" MODIFIED="1511778651282" TEXT="Otw&#xf3;rz split pod rangerem dla vima"/>
@@ -503,6 +499,12 @@
 <node CREATED="1511718045534" ID="ID_1676480027" MODIFIED="1511718086007" TEXT="Po&#x17c;egnanie - slajd, kt&#xf3;ry odpali zdj&#x119;cie mind mapy z &quot;dzi&#x119;ki!&quot; nad ni&#x105;">
 <font NAME="SansSerif" SIZE="12"/>
 </node>
+</node>
+<node CREATED="1511793920115" ID="ID_707829162" MODIFIED="1511793922583" POSITION="right" TEXT="Bonusy">
+<node CREATED="1511793925395" ID="ID_990179688" MODIFIED="1511793929718" TEXT="sl"/>
+<node CREATED="1511793930227" ID="ID_1142475608" MODIFIED="1511793933321" TEXT="hollywood"/>
+<node CREATED="1511793933726" ID="ID_1062987193" MODIFIED="1511793935452" TEXT="cowsay"/>
+<node CREATED="1511793936005" ID="ID_956460514" MODIFIED="1511793939690" TEXT="cool retro term"/>
 </node>
 <node CREATED="1511632128600" ID="ID_184661180" MODIFIED="1511632143227" POSITION="left" TEXT="Praca z Vimem (miejsce na drug&#x105; prezentacj&#x119;)">
 <node CREATED="1511632659906" ID="ID_1452760141" MODIFIED="1511632668550" TEXT="TODO">

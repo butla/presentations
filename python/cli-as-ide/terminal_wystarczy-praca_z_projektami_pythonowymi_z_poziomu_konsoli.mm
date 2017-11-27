@@ -121,6 +121,9 @@
 <node CREATED="1511637192121" ID="ID_18872853" MODIFIED="1511719278643" TEXT="xargs">
 <icon BUILTIN="button_ok"/>
 </node>
+<node CREATED="1511783409024" ID="ID_107412649" MODIFIED="1511783415786" TEXT="HTTPie">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1511637902288" ID="ID_1284080072" MODIFIED="1511716365534" TEXT="Forma prezentacji">
 <icon BUILTIN="button_ok"/>
@@ -153,8 +156,9 @@
 </node>
 </node>
 </node>
-<node CREATED="1511631172525" ID="ID_1115458077" MODIFIED="1511640680330" POSITION="right" TEXT="Plan prezentacji">
-<node CREATED="1511638207256" ID="ID_1651415414" MODIFIED="1511638210971" TEXT="Wst&#x119;p">
+<node CREATED="1511631172525" ID="ID_1115458077" MODIFIED="1511787256667" POSITION="right" TEXT="Plan prezentacji">
+<node CREATED="1511638207256" ID="ID_1651415414" MODIFIED="1511786791487" TEXT="Wst&#x119;p">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1511716145622" ID="ID_1717616057" MODIFIED="1511716496880" TEXT="Zacznij od pulpitu">
 <icon BUILTIN="button_ok"/>
 <node CREATED="1511716157606" ID="ID_1125124713" MODIFIED="1511716732300" TEXT="Alt tab na konsol&#x119; w folderze ze slajdami">
@@ -186,7 +190,8 @@
 </node>
 </node>
 </node>
-<node CREATED="1511640802810" ID="ID_1551589298" MODIFIED="1511640816707" TEXT="Podstawowe narz&#x119;dzia">
+<node CREATED="1511640802810" ID="ID_1551589298" MODIFIED="1511786317437" TEXT="Podstawowe narz&#x119;dzia">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1511702779459" ID="ID_731029225" MODIFIED="1511779466812" TEXT="Konsole">
 <icon BUILTIN="button_ok"/>
 <node CREATED="1511702789503" ID="ID_163798205" MODIFIED="1511702795906" TEXT="To jest m&#xf3;j emulator terminala"/>
@@ -233,7 +238,8 @@
 </node>
 </node>
 </node>
-<node CREATED="1511640588202" ID="ID_359532642" MODIFIED="1511640591133" TEXT="Less">
+<node CREATED="1511640588202" ID="ID_359532642" MODIFIED="1511786310047" TEXT="Less">
+<icon BUILTIN="button_cancel"/>
 <node CREATED="1511779011854" ID="ID_163741350" MODIFIED="1511779021713" TEXT="TODO przesu&#x144; to gdzie&#x15b; indziej"/>
 <node CREATED="1511640592009" ID="ID_52592421" MODIFIED="1511640599181" TEXT="on te&#x17c; ma vimowe bindingi!">
 <node CREATED="1511708590219" ID="ID_1404912879" MODIFIED="1511708602819" TEXT="Poka&#x17c; na jakim&#x15b; listingu zainstalowanych pakiet&#xf3;w"/>
@@ -316,46 +322,106 @@
 <node CREATED="1511636295546" ID="ID_845516247" MODIFIED="1511636314038" TEXT="Wymaga Neovima lub vim-gtk3 i konfiguracji"/>
 </node>
 </node>
-<node CREATED="1511779366775" ID="ID_1566227593" MODIFIED="1511779372946" TEXT="Implementacja prostego endpointa">
+<node CREATED="1511779366775" ID="ID_1566227593" MODIFIED="1511783970808" TEXT="Implementacja prostego endpointa">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1511781398242" ID="ID_1732333659" MODIFIED="1511781426772" TEXT="Dodanie nowej &#x15b;cie&#x17c;ki">
 <node CREATED="1511781430115" ID="ID_720032049" MODIFIED="1511781466050" TEXT="ctrl p . &lt;- &#x17c;eby pokaza&#x107;, jak to si&#x119; robi"/>
 <node CREATED="1511781469577" ID="ID_139053135" MODIFIED="1511781479774" TEXT="poka&#x17c; potem menu otwartych plik&#xf3;w"/>
 <node CREATED="1511781539366" ID="ID_72691061" MODIFIED="1511781551719" TEXT="zapisanie - mam od tego swoje bindingi"/>
 </node>
-<node CREATED="1511781635207" ID="ID_1873523437" MODIFIED="1511781689151" TEXT="Endpoint b&#x119;dzie liczy&#x142; wszystkie wyst&#x105;pienia czego&#x15b; w POSTcie"/>
-<node CREATED="1511720594398" ID="ID_711975899" MODIFIED="1511720609722" TEXT="Zawrzyj jaki&#x15b; b&#x142;&#x105;d, &#x17c;eby mo&#x17c;na by&#x142;o sie podpi&#x105;&#x107; debugiem">
+<node CREATED="1511781756763" ID="ID_1194539048" MODIFIED="1511781801826" TEXT="Wpisz add route z nazw&#x105; nieistniej&#x105;cej funkcji">
+<node CREATED="1511783144568" ID="ID_707400219" MODIFIED="1511783165407" TEXT="B&#x119;dzie bra&#x107; JSON i zwraca&#x107; warto&#x15b;&#x107; dla ostatniego alfabetycznie klucza"/>
+</node>
+<node CREATED="1511781808908" ID="ID_1894796927" MODIFIED="1511781822031" TEXT="Stw&#xf3;rz szkielet tej funkcji">
+<node CREATED="1511782864272" ID="ID_1162030895" MODIFIED="1511783201931" TEXT="YouCompleteMe podpowie nazw&#x119;, jak ju&#x17c; jest wpisane w add route"/>
+</node>
+<node CREATED="1511782520953" ID="ID_1444720654" MODIFIED="1511783207413" TEXT="Do ptpythona, aby sprawdzi&#x107; sw&#xf3;j pomys&#x142;!">
+<node CREATED="1511782544150" ID="ID_941662559" MODIFIED="1511782554816" TEXT="Poka&#x17c;, &#x17c;e podpowiada &#x15b;cie&#x17c;ki w systemie"/>
+<node CREATED="1511782555644" ID="ID_986532226" MODIFIED="1511782572123" TEXT="edycja wielolinijkowych funkcji"/>
+<node CREATED="1511782645550" ID="ID_80224796" MODIFIED="1511782649806" TEXT="BINDINGI VIMA!"/>
+</node>
+<node CREATED="1511782980344" ID="ID_758087831" MODIFIED="1511783237169" TEXT="Przeklej tekst z ptpythona i doko&#x144;cz funkcj&#x119;">
+<node CREATED="1511783249364" ID="ID_1847098417" MODIFIED="1511783262966" TEXT="pomi&#x144; await przy czytaniu JSONa"/>
+<node CREATED="1511785856266" ID="ID_157123664" MODIFIED="1511785862376" TEXT="Nie pisz docstringa!"/>
+</node>
+<node CREATED="1511783292037" ID="ID_1379740685" MODIFIED="1511783338173" TEXT="Zobacz co ju&#x17c; zrobili&#x15b;my">
+<node CREATED="1511783340243" ID="ID_1565167983" MODIFIED="1511783343112" TEXT="Git status"/>
+<node CREATED="1511783343963" ID="ID_1503531873" MODIFIED="1511783345648" TEXT="git diff"/>
+</node>
+</node>
+<node CREATED="1511783557790" ID="ID_1255901695" MODIFIED="1511786272757" TEXT="Test dla endpointa">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1511783564863" ID="ID_514646262" MODIFIED="1511783571927" TEXT="Trzeba sprawdzi&#x107;, &#x17c;e dzia&#x142;a"/>
+<node CREATED="1511784307863" ID="ID_1438608559" MODIFIED="1511784316159" TEXT="Poka&#x17c; organizacj&#x119; test&#xf3;w w rangerze"/>
+<node CREATED="1511784289076" ID="ID_1251857195" MODIFIED="1511784298189" TEXT="Otw&#xf3;rz unit/test_handlers"/>
+<node CREATED="1511783808601" ID="ID_654475461" MODIFIED="1511783810586" TEXT="Napisz">
+<node CREATED="1511784379483" ID="ID_962365478" MODIFIED="1511784388885" TEXT="Podpowiada fixture app_client"/>
+</node>
+<node CREATED="1511720151469" ID="ID_870882157" MODIFIED="1511720167657" TEXT="Odpali&#x107; tylko ten jeden test">
+<node CREATED="1511720161678" ID="ID_742047913" MODIFIED="1511720166218" TEXT="Pokazanie, &#x17c;e mo&#x17c;na"/>
+<node CREATED="1511784062154" ID="ID_1563306640" MODIFIED="1511785702606" TEXT="Poka&#x17c; b&#x142;&#x105;d"/>
+<node CREATED="1511784662877" ID="ID_728972749" MODIFIED="1511784677599" TEXT="Dodaj wyj&#x105;tek bezpiecze&#x144;stwa"/>
+<node CREATED="1511784678347" ID="ID_920561211" MODIFIED="1511784681540" TEXT="Odpal jeszcze raz">
+<node CREATED="1511784823790" ID="ID_270264069" MODIFIED="1511784831637" TEXT="Dostali&#x15b;my konkretn&#x105; linijk&#x119;"/>
+<node CREATED="1511784832130" ID="ID_223415110" MODIFIED="1511784845917" TEXT="Wiem, co jest nie tak, ale za&#x142;&#xf3;&#x17c;my, &#x17c;e chcemy podebugowa&#x107;"/>
+</node>
+</node>
+<node CREATED="1511784084631" ID="ID_1223535166" MODIFIED="1511785649438" TEXT="Debug b&#x142;&#x119;du">
 <node CREATED="1511720610798" ID="ID_1668787873" MODIFIED="1511720621811" TEXT="Kr&#xf3;ciutkie intro do pudb najpierw"/>
+<node CREATED="1511721035488" ID="ID_431660098" MODIFIED="1511784876281" TEXT="Poka&#x17c; alias"/>
 <node CREATED="1511720622535" ID="ID_784439875" MODIFIED="1511720634843" TEXT="Powiedz, &#x17c;e potrzebuje mie&#x107; dost&#x119;p do stdout">
 <node CREATED="1511720636495" ID="ID_1608320564" MODIFIED="1511720646227" TEXT="ipdb jako alternatywa bez tego"/>
 </node>
-<node CREATED="1511721035488" ID="ID_431660098" MODIFIED="1511721039140" TEXT="Poka&#x17c; alias"/>
+<node CREATED="1511785193108" ID="ID_295611979" MODIFIED="1511785576015" TEXT="Trick z pozwoleniem, &#x17c;eby przesz&#x142;o, &#x17c;eby si&#x119; za&#x142;adowa&#x142; modu&#x142;">
+<node CREATED="1511785357043" ID="ID_545682433" MODIFIED="1511785372139" TEXT="mo&#x17c;na przej&#x15b;&#x107; przez ca&#x142;ego pytesta, ale to b&#xf3;l"/>
 </node>
-<node CREATED="1511719916779" ID="ID_897016989" MODIFIED="1511720468565" TEXT="Napisanie"/>
-<node CREATED="1511720434466" ID="ID_371587567" MODIFIED="1511720462743" TEXT="Nowy feature sprawdzi&#x107; w ptpythonie"/>
-<node CREATED="1511720028452" ID="ID_959467327" MODIFIED="1511720038736" TEXT="Por&#xf3;wnanie na wszelki spos&#xf3;b zmian gitem">
-<node CREATED="1511721135346" ID="ID_483393716" MODIFIED="1511721139958" TEXT="Git diff co chwil&#x119;"/>
-<node CREATED="1511637622024" ID="ID_1321986314" MODIFIED="1511637636388" TEXT="Por&#xf3;wnywanie pliku do wersji z innego commitu."/>
-<node CREATED="1511637637904" ID="ID_1674033742" MODIFIED="1511637647228" TEXT="Podmiana pliku na wersj&#x119; z innego commitu. "/>
-<node CREATED="1511637649520" ID="ID_1241302380" MODIFIED="1511637657284" TEXT="Pokazanie dw&#xf3;ch drzew commit&#xf3;w"/>
-<node CREATED="1511721654769" ID="ID_1611449173" MODIFIED="1511721666525" TEXT="Przed commitem por&#xf3;wnanie meldem">
+<node CREATED="1511785529397" ID="ID_75280651" MODIFIED="1511785543856" TEXT="Wejd&#x17a; na lini&#x119; przed wyjebaniem">
+<node CREATED="1511785562056" ID="ID_559213516" MODIFIED="1511785573797" TEXT="Poka&#x17c;, &#x17c;e mo&#x17c;na te&#x17c; otworzy&#x107; shell w tym momencie">
+<node CREATED="1511785587982" ID="ID_1560187718" MODIFIED="1511785593760" TEXT="wbudowany jest biedny"/>
+<node CREATED="1511785594133" ID="ID_314285021" MODIFIED="1511785597490" TEXT="wol&#x119; ptpythona"/>
+</node>
+</node>
+</node>
+<node CREATED="1511785658223" ID="ID_1397994721" MODIFIED="1511785660620" TEXT="Popraw kod">
+<node CREATED="1511785759277" ID="ID_456314050" MODIFIED="1511785768250" TEXT="Odpal pojedynczy test - przechodzi!"/>
+<node CREATED="1511785771746" ID="ID_47000401" MODIFIED="1511785776607" TEXT="Pu&#x15b;&#x107; ca&#x142;e unit testy"/>
+</node>
+<node CREATED="1511785922404" ID="ID_1243622333" MODIFIED="1511785927843" TEXT="Ostateczna weryfikacja">
+<node CREATED="1511785957893" ID="ID_822749776" MODIFIED="1511785961198" TEXT="Dla pewno&#x15b;ci"/>
+<node CREATED="1511785932620" ID="ID_1995576167" MODIFIED="1511785940043" TEXT="Jeszcze pylint z toxa">
+<node CREATED="1511785942052" ID="ID_1795070811" MODIFIED="1511785944143" TEXT="napraw"/>
+</node>
+<node CREATED="1511785946712" ID="ID_523321579" MODIFIED="1511785948963" TEXT="Ca&#x142;y tox"/>
+</node>
+</node>
+<node CREATED="1511783663179" ID="ID_1289489188" MODIFIED="1511786330735" TEXT="Commit pracy">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1511783693957" ID="ID_1269386936" MODIFIED="1511783706634" TEXT="popatrzmy, czy nie ma jakiego&#x15b; bubla w naszym kodzie">
+<node CREATED="1511783710080" ID="ID_1543530625" MODIFIED="1511783712736" TEXT="Meld">
 <node CREATED="1511721667354" ID="ID_637111045" MODIFIED="1511721685396" TEXT="konfiguruje si&#x119; go w gicie"/>
 <node CREATED="1511721686065" ID="ID_1010796840" MODIFIED="1511721688380" TEXT="mam alias"/>
 </node>
 </node>
-<node CREATED="1511720094037" ID="ID_1886277075" MODIFIED="1511720101617" TEXT="Unit test dla endpointa">
-<node CREATED="1511720151469" ID="ID_870882157" MODIFIED="1511720167657" TEXT="Odpali&#x107; tylko ten jeden test">
-<node CREATED="1511720161678" ID="ID_742047913" MODIFIED="1511720166218" TEXT="Pokazanie, &#x17c;e mo&#x17c;na"/>
+<node CREATED="1511783736460" ID="ID_1195599667" MODIFIED="1511786261580" TEXT="Commit (typu feat)"/>
 </node>
-<node CREATED="1511720168630" ID="ID_253131924" MODIFIED="1511720184906" TEXT="Potem puszcza&#x107; ca&#x142;e unittesty dop&#xf3;ki nie zaczn&#x105; przechodzi&#x107;"/>
-<node CREATED="1511720123189" ID="ID_1936082123" MODIFIED="1511720135234" TEXT="puszczenie ca&#x142;ego toxa jeszcze raz, jak unit test przechodzi"/>
+<node CREATED="1511783382945" ID="ID_1572904265" MODIFIED="1511786504273" TEXT="Po prostu odpal aplikacj&#x119; interaktywnie i sprawd&#x17a; przez HTTPie">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1511783925826" ID="ID_1369790981" MODIFIED="1511783940405" TEXT="Mo&#x17c;na chcie&#x107; si&#x119; pobawi&#x107; z aplikacj&#x105;"/>
+<node CREATED="1511783452903" ID="ID_1095465625" MODIFIED="1511783475582" TEXT="Bo my mamy testy funkcjonalne z docker-compose, to se mo&#x17c;na je wystartowa&#x107;, &#x17c;eby mie&#x107; aplikacj&#x119;"/>
 </node>
-<node CREATED="1511720050451" ID="ID_1200986558" MODIFIED="1511720059064" TEXT="puszczenie tylko pylinta z toxa">
-<node CREATED="1511720064477" ID="ID_1347709314" MODIFIED="1511720083033" TEXT="Zr&#xf3;b jaki&#x15b; b&#x142;&#x105;d stylowy, &#x17c;eby mo&#x17c;na by&#x142;o pokaza&#x107; iteracyjne odpalanie pylinta"/>
+<node CREATED="1511783619181" ID="ID_690614281" MODIFIED="1511786643849" TEXT="Gdzie zaszli&#x15b;my z commitem wzgl&#x119;dem prawdziwego mastera">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1511783784728" ID="ID_258362466" MODIFIED="1511783794258" TEXT="Pokazanie, co mo&#x17c;na robi&#x107; z gitem"/>
+<node CREATED="1511637649520" ID="ID_912395658" MODIFIED="1511637657284" TEXT="Pokazanie dw&#xf3;ch drzew commit&#xf3;w"/>
+<node CREATED="1511637622024" ID="ID_1321986314" MODIFIED="1511637636388" TEXT="Por&#xf3;wnywanie pliku do wersji z innego commitu."/>
+<node CREATED="1511637637904" ID="ID_1674033742" MODIFIED="1511637647228" TEXT="Podmiana pliku na wersj&#x119; z innego commitu. "/>
 </node>
+<node CREATED="1511786665431" ID="ID_199690794" MODIFIED="1511786837377" TEXT="Co z bazami danych?">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1511786727635" ID="ID_1536952624" MODIFIED="1511787100436" TEXT="Interaktywne bawienie si&#x119; z baz&#x105;">
+<node CREATED="1511721062904" ID="ID_1376701864" MODIFIED="1511786754086" TEXT="Wystartuj docker-compose">
+<node CREATED="1511787073200" ID="ID_1760275489" MODIFIED="1511787080633" TEXT="Te&#x17c; alias na to. Po co on?"/>
 </node>
-<node CREATED="1511640787035" ID="ID_651384311" MODIFIED="1511719496558" TEXT="Scenariusz przy pracy z projektem">
-<node CREATED="1511721050896" ID="ID_324342641" MODIFIED="1511721062020" TEXT="Wspomina&#x142;em o docker-compose">
-<node CREATED="1511721062904" ID="ID_1376701864" MODIFIED="1511721073388" TEXT="Wystartuj go"/>
 <node CREATED="1511721073929" ID="ID_1621702770" MODIFIED="1511721083149" TEXT="Podepnij si&#x119; pgcli">
 <node CREATED="1511721084097" ID="ID_1965112411" MODIFIED="1511721097892" TEXT="Po kr&#xf3;tce przedstaw co to jest">
 <node CREATED="1511021128673" ID="ID_1432346834" MODIFIED="1511021132888" TEXT="pgcli"/>
@@ -372,24 +438,34 @@
 </node>
 </node>
 </node>
+<node CREATED="1511786674519" ID="ID_249080355" MODIFIED="1511786696284" TEXT="migracje">
+<node CREATED="1511786682667" ID="ID_206443150" MODIFIED="1511786689432" TEXT="Odpalane przy testach"/>
+<node CREATED="1511786702729" ID="ID_1310201706" MODIFIED="1511786707364" TEXT="Moje tworzenie migracji">
+<node CREATED="1511786709196" ID="ID_250219653" MODIFIED="1511786719186" TEXT="Lubimy surowego SQLa"/>
+</node>
+</node>
 </node>
 <node CREATED="1511631450176" ID="ID_1946710202" MODIFIED="1511717996677" TEXT="Powiedz czemu w og&#xf3;le siedzie&#x107; w konsoli">
 <node CREATED="1511708676176" ID="ID_1937596113" MODIFIED="1511718012242" TEXT="Slajd - po co si&#x119; tak m&#x119;czy&#x107;?"/>
-<node CREATED="1511021559862" ID="ID_496616300" MODIFIED="1511632054676" TEXT="Mo&#x17c;esz sam wszystko &#x142;atwo &#x142;&#x105;czy&#x107; ze sob&#x105; jak ci si&#x119; podoba."/>
-<node CREATED="1511021587984" ID="ID_1066472959" MODIFIED="1511021611656" TEXT="Nabywasz umiej&#x119;tno&#x15b;ci uniwersalne, w przeciwie&#x144;stwie do zamykania si&#x119; w jakim&#x15b; IDE">
+<node CREATED="1511021587984" ID="ID_1066472959" MODIFIED="1511787713028" TEXT="Nabywasz umiej&#x119;tno&#x15b;ci uniwersalne">
 <node CREATED="1511637320265" ID="ID_12413348" MODIFIED="1511637322197" TEXT="Skr&#xf3;ty VIMa prawie wsz&#x119;dzie dzia&#x142;aj&#x105; i s&#x105;&#xa0;wydajne. "/>
 <node CREATED="1511773511007" ID="ID_1686083233" MODIFIED="1511773529760" TEXT="narz&#x119;dzia s&#x105; &#x142;atwo konfigurowalne przez pliki">
 <node CREATED="1511773532499" ID="ID_811467646" MODIFIED="1511773542899" TEXT="Zobaczcie sobie na pliki konfiguracyjne IDE"/>
 </node>
+<node CREATED="1511787699380" ID="ID_784161498" MODIFIED="1511787732457" TEXT="Nie zamykasz si&#x119; w jakim&#x15b; IDE i jego ekosystemie">
+<node CREATED="1511787737676" ID="ID_51767330" MODIFIED="1511787745869" TEXT="to, w czym si&#x119; zamykasz jest du&#x17c;o wi&#x119;ksze"/>
 </node>
-<node CREATED="1511632064688" ID="ID_329801130" MODIFIED="1511638420404" TEXT="Nie zamykasz si&#x119; w jakim&#x15b; IDE i jego ekosystemie">
 <node CREATED="1511638420920" ID="ID_1608279939" MODIFIED="1511638444228" TEXT="Pracujesz z ca&#x142;ym systemem stworzonym przez m&#x105;dro&#x15b;&#x107; przodk&#xf3;w"/>
-</node>
 <node CREATED="1511021616279" ID="ID_1550495647" MODIFIED="1511637336765" TEXT="Rozumiesz, co tak naprawd&#x119; si&#x119; dzieje, kiedy robisz buildy w CI, itp"/>
+</node>
+<node CREATED="1511021559862" ID="ID_496616300" MODIFIED="1511632054676" TEXT="Mo&#x17c;esz sam wszystko &#x142;atwo &#x142;&#x105;czy&#x107; ze sob&#x105; jak ci si&#x119; podoba."/>
+<node CREATED="1511638607672" ID="ID_682297014" MODIFIED="1511787807565" TEXT="Zajebiste, koj&#x105;ce t&#x142;o :)"/>
+<node CREATED="1511787784691" ID="ID_498000342" MODIFIED="1511787789280" TEXT="Czemu si&#x119; przesiad&#x142;em?">
 <node CREATED="1511631895105" ID="ID_1811894841" MODIFIED="1511631983140" TEXT="U&#x17c;ywa&#x142;em i tak wielu program&#xf3;w z konsoli (ansible, terraform, ptpython). Teraz mam &#x15b;rodowisko zintegrowane ze wszystkim."/>
 <node CREATED="1511631990137" ID="ID_1393844905" MODIFIED="1511632028252" TEXT="Nie chcia&#x142;o mi si&#x119; czeka&#x107; na wstanie IDE jak edytowa&#x142;em ma&#x142;e pliki, albo jak robi&#x142;em ma&#x142;e zmiany w kilku projektach."/>
-<node CREATED="1511638607672" ID="ID_682297014" MODIFIED="1511638627540" TEXT="Zajebiste, koj&#x105;ce t&#x142;o :)"/>
+</node>
 <node CREATED="1511635013573" ID="ID_664869037" MODIFIED="1511635020705" TEXT="Minusy">
+<node CREATED="1511787826003" ID="ID_650305027" MODIFIED="1511787830082" TEXT="Odpal slajd"/>
 <node CREATED="1511021631797" ID="ID_1907068219" MODIFIED="1511630793629" TEXT="Nie nadaje si&#x119; do wszystkiego">
 <node CREATED="1511021653638" ID="ID_1756550722" MODIFIED="1511021656736" TEXT="Przegl&#x105;darka"/>
 <node CREATED="1511021647652" ID="ID_1079713419" MODIFIED="1511021651903" TEXT="Mind mapa"/>

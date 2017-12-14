@@ -1,0 +1,58 @@
+TDD mikroserwisów
+
+---------------------------------------------------
+
+>>> Abstrakt krótki (<500 znaków):
+
+Propozycja tego, jak można tworzyć mikroserwisy w Pythonie zakładając pisanie testów najpierw, a dopiero potem właściwego kodu. Na każdym etapie pracy. Żadne pseudo-TDD.
+
+Skupię się na testach funkcjonalnych badających całych proces aplikacji z zewnątrz (pomogą w tym Docker i Pytest) oraz testach kontraktowych pilnujących, że nikt w trakcie developmentu nie zmienił zewnętrznych interfejsów naszej aplikacji. W drugim przypadku wykorzystany będzie Swagger.
+
+Przykłady nie będą polegać na silnej integracji z żadnym webowym frameworkiem. Poruszę też kwestię mierzenia pokrycia testowego w nieco bardziej skomplikowanych przypadkach (jak testy funkcjonalne).
+
+---------------------------------------------------
+
+>>> Cel propozycji:
+
+Zademonstrowanie technik pozwalających/ułatwiających wytwarzać Pythonowych mikroserwisów w metodyce TDD (serio, najpierw test, potem kod).
+
+---------------------------------------------------
+
+>>> Grupa docelowa
+
+Deweloperzy i testerzy backendów, w szczególności mikroserwisów
+
+---------------------------------------------------
+
+>>> Szczegółowy abstrakt:
+
+These will be my ideas on how to help a microservice-based (HTTP) project by integrating testing into the development process (TDD).
+I'll approach the testing pyramid presented in Martin Fowler's "Microservice Testing" as well as the test variants in "Building Microservices" (O'Reilly) and I'll show a way of how they can be translated to real-life Python.
+
+The main focus will be on "service tests" (aka. out-of-process component tests) and contract tests. They both can be run relatively fast on a development machine and can give fast feedback to the developer, preventing many kinds of problems.
+
+Service tests run the whole application process without any internal modifications, but have to present the service with a fake "outside world". I'll show how to fake external HTTP services with Mountebank (similar to WireMock). Instead of faking other systems (like databases) we can quickly spin up the real deal as a Docker container from within the tests.
+
+Contract tests check if the contract (interface) of your service with the outside world is kept, so no external services should be broken by the changes you are introducing. It can also work the other way around, proving that your collaborators are keeping their part of the deal. In both cases, Swagger (a RESTful API description scheme) and a few clever tricks can be used for significant advantage.
+
+---------------------------------------------------
+
+>>> Plan propozycji
+
+2 min: Przedstawienie się.
+5 min: Ogólnie o mikroserwisach, aplikacjach backendowych.
+23 min: Moja przygoda z mikroserwisami oraz przemyślenia i rozwiązania z niej płynące. O testach jednostkowych, testach funkcjonalnych, pokryciu testowym, trochę o radzeniu sobie z managerami, dwupętlowym cyklu TDD / BDD. Ciężko w tym momencie powiedzieć o czym dokładnie będę mówił ile minut, ponieważ dopiero przygotowuję to wystąpienie, a chcę, żeby płynnie łączyć tematy posiłkując się prawdziwą historią z pracy, jej wyzwaniami, specyfiką i wymaganiami.
+10 minut: pytania i odpowiedzi
+
+---------------------------------------------------
+
+>>> Autor
+
+Michał Bultrowicz
+
+Pełen pasji deweloper z nastawieniem na ciągły rozwój i wysoką jakość. Pracował nad różnorodnymi projektami (np. wieloplatformowym frameworkiem do zautomatyzowanych testów czy bezpieczną łącznością systemów osadzonych) używając różnych języków (Java SE/Android, C#, C++, Python), ale zakochał się w Pythonie.
+
+Ostatni projekt przy którym pracował (jako techniczny lider jednego z zespołów deweloperskich) to Trusted Analytics Platform (http://trustedanalytics.org/) - rozwiązanie oparte o PaaS i wielojęzykowe mikroserwisy.
+
+Niedawno rzucił pracę aby móc w spokoju zgłebiać interesujące go technologie. I żeby trochę się wyluzować.
+

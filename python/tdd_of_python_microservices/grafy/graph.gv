@@ -1,0 +1,9 @@
+digraph  {
+	our_service -> our_service_session;
+	our_service -> ext_service_impostor;
+	db -> db_session;
+	db_session -> redis_port;
+	ext_service_impostor -> mountebank;
+	test_something -> our_service;
+	test_something -> db;
+}

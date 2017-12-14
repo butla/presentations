@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph edgedefault="directed">
+    <node id="mountebank" />
+    <node id="our_service" />
+    <node id="db" />
+    <node id="our_service_session" />
+    <node id="db_session" />
+    <node id="ext_service_impostor" />
+    <node id="redis_port" />
+    <node id="test_something" />
+    <edge source="our_service" target="ext_service_impostor" />
+    <edge source="our_service" target="our_service_session" />
+    <edge source="db" target="db_session" />
+    <edge source="db_session" target="redis_port" />
+    <edge source="ext_service_impostor" target="mountebank" />
+    <edge source="test_something" target="our_service" />
+    <edge source="test_something" target="db" />
+  </graph>
+</graphml>

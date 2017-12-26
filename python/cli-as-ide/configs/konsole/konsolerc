@@ -1,0 +1,25 @@
+[Desktop Entry]
+DefaultProfile=Butla.profile
+
+[Favorite Profiles]
+Favorites=Duze.profile,Wieksze.profile,Butla.profile
+
+[KFileDialog Settings]
+Recent Files[$e]=Surreal-Space-Wallpaper.jpg,file:///data/grafika/Tapety/1920x1080/Surreal-Space-Wallpaper_darker.jpg,file:///data/grafika/Tapety/1920x1080/Surreal-Space-Wallpaper.jpg
+Recent URLs[$e]=file:///data/grafika/Tapety/1920x1080/,file:///data/grafika/Tapety/,file:///data/grafika/
+
+[KonsoleWindow]
+ShowMenuBarByDefault=false
+
+[MainWindow]
+Height 1080=661
+Height 1200=982
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAAB4AAAAP1AAAABAAAAAQAAAAIAAAACPwAAAAA
+ToolBarsMovable=Disabled
+Width 1920=1272
+Window-Maximized 1080x1920=true
+Window-Maximized 1200x1920=true
+
+[TabBar]
+TabBarVisibility=ShowTabBarWhenNeeded

@@ -513,7 +513,6 @@
 <node CREATED="1511633984448" ID="ID_430658996" MODIFIED="1511634003731" TEXT="Nie znajduje referencji do AppConfig w testach Iteriodata API - czemu?"/>
 <node CREATED="1511633634928" ID="ID_1552245134" MODIFIED="1511633649019" TEXT="Kolorowanie parametr&#xf3;w funkcji inaczej ni&#x17c; zmiennych w niej?"/>
 <node CREATED="1511634013679" ID="ID_837762378" MODIFIED="1511634032971" TEXT="Chodzenie do definicji funkcji i klas maj&#x105;cych dekorator"/>
-<node CREATED="1511632753857" ID="ID_1306740723" MODIFIED="1511632760989" TEXT="Sprawdzanie sk&#x142;adni"/>
 <node CREATED="1511633844899" ID="ID_908362152" MODIFIED="1511633871478" TEXT="Skakanie do definicji zmiennych w funkcji przez Jedi nie dzia&#x142;a, przez &quot;gd&quot; ju&#x17c; tak?"/>
 <node CREATED="1511632762153" ID="ID_652998232" MODIFIED="1511633061648" TEXT="odpalanie test&#xf3;w na skr&#xf3;t"/>
 <node CREATED="1511633122530" ID="ID_1379321369" MODIFIED="1511633140467" TEXT="Zmiana nazwy funkcji, zmiennej na skr&#xf3;t"/>
@@ -522,7 +521,6 @@
 <node CREATED="1511633453884" ID="ID_916523911" MODIFIED="1511633461463" TEXT="Makra?"/>
 <node CREATED="1511633461979" ID="ID_379294980" MODIFIED="1511633491223" TEXT="c w jednym miejscu, potem skakanie do kolejnych wyst&#x105;pie&#x144; i kropka?"/>
 </node>
-<node CREATED="1511633500570" ID="ID_283020665" MODIFIED="1511633518214" TEXT="Automatyczna analiza statyczna pliku"/>
 <node CREATED="1511633666647" ID="ID_1487802052" MODIFIED="1511633679866" TEXT="Wykluczy&#x107; folder z szukania referencji (np. tox)"/>
 <node CREATED="1511633731845" ID="ID_1041259431" MODIFIED="1511633747161" TEXT="Sprawdzi&#x107; jak te problemy maj&#x105; si&#x119; do deoplete i neocomplete?"/>
 <node CREATED="1511633881937" ID="ID_1744155984" MODIFIED="1511633894126" TEXT="Automatyczne wstawianie dosctringa pod funkcj&#x105;?"/>
@@ -542,6 +540,8 @@
 </node>
 <node CREATED="1511632683049" ID="ID_1756251469" MODIFIED="1511633068341" TEXT="znajdowanie referencji"/>
 <node CREATED="1511632695898" ID="ID_1104048035" MODIFIED="1511632713445" TEXT="przej&#x15b;cie do definicji"/>
+<node CREATED="1511632753857" ID="ID_1306740723" MODIFIED="1514324311706" TEXT="Sprawdzanie sk&#x142;adni (Ale plugin)"/>
+<node CREATED="1511633500570" ID="ID_283020665" MODIFIED="1514324327473" TEXT="Automatyczna analiza statyczna pliku (Ale plugin)"/>
 <node CREATED="1511632722138" ID="ID_783472620" MODIFIED="1511632729629" TEXT="bufory zamiast tab&#xf3;w">
 <node CREATED="1511632732433" ID="ID_1604373173" MODIFIED="1511632739781" TEXT="Ctrl P te&#x17c;">
 <node CREATED="1511633196275" ID="ID_1430939496" MODIFIED="1511633206470" TEXT="Przechodzenie do innych plik&#xf3;w"/>

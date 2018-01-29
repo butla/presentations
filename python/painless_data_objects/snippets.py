@@ -125,19 +125,17 @@ def do_thing_1(user_info: UserInfo):
 
 
 # slajd 10
+import base64, json
+
 class UserInfo(NamedTuple):
     email: str
     name: str
     surname: str
 
-import base64, json
-
-# powiedzmy, że chcemy dodać funkcje
-def as_base64(self):
-    return base64.b64encode(json.dumps(self._asdict()).encode())
-
-# trochę dziwnie (fuck yeah python)
-UserInfo.as_base64 = as_base64
+    # Możemy dodać funkcję, ale wysypie się jeśli będzie zmieniać pola,
+    # ponieważ tuple są niemutowalne.
+    def as_base64(self):
+        return base64.b64encode(json.dumps(self._asdict()).encode())
 
 user = UserInfo('bla@ble.com', 'Blecjusz', 'Kowalski')
 user.as_base64()
@@ -146,7 +144,7 @@ user.as_base64()
 import attr
 
 @attr.s
-class UserInfo(NamedTuple):
+class UserInfo:
     email = attr.ib(validator=attr.validators.instance_of(str))
     name = attr.ib(default='')
     surname = attr.ib(default='')

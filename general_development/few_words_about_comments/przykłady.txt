@@ -1,0 +1,27 @@
+# Komentarze
+We don't need a real payload there. Besides, the actual shape
+of the payload can get different over time, and since we're not
+validating the payload in the API, it's probably best to leave
+that impression in the tests.
+
+Catching all psycopg2 errors so the Lambda won't be restarted
+with the same events when an error type other than DataError pops up.
+
+
+# commity
+Author: Michal Bultrowicz <michalbultrowicz@gmail.com>
+Date:   Tue Feb 20 18:16:26 2018 +0100
+
+    Refactored Kinesis uploaders for predictable testing.
+
+    Before they would just run in the background, even in unit tests.
+    Now they are created outside of the application, so their test
+    versions don't actually do anything in the background.
+
+Author: Michal Bultrowicz <michalbultrowicz@gmail.com>
+Date:   Thu Feb 22 13:40:38 2018 +0100
+
+    events uploader: refactored background uploading
+
+    Now it'll be easier to implement and test the precision of
+    uploading the events once some capacity thresholds are reached.

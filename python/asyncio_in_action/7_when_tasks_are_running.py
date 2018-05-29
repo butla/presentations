@@ -16,11 +16,7 @@ async def backgroud_work_secondary():
 
 
 async def backgroud_work_tertiary():
-    print("I'm executed when I'm created until the first await. Before that I'm sync.")
-
-    # Why does this run if the main task only sleeps asynchronously for 2 seconds?
-    # because I count wait time from task creation (but does it get to first
-    # await?
+    print("I'm executed until the first await when I'm created . Before that I'm sync.")
     await asyncio.sleep(3)
     print('background 2!')
 

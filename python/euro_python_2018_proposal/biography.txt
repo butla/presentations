@@ -1,0 +1,3 @@
+I'm a remote Python back-end engineer at Iterio Data. I also don't shy away from setting up the infrastructure. So even though I don't like that term being used to describe a role, I'm a DevOpsy kind of guy.
+
+I'm MSc in Computer Science. Before Iterio I worked on a number of software products at Intel. I took a year-long break after quitting it, wanting to relax and develop myself in the ways I wanted, not the ones the corporation required.

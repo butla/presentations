@@ -1,0 +1,24 @@
+How many unknowns can your project team handle? Your code, as well as your tools will evolve, you don't need to have everything exactly right from the start.
+
+Notes:
+- Mention testability improvements by adding default values for waits in the config and then overwritting them for the tests.
+- we didn't want to create microservices ("start with a monolith"), but they were sorta created naturally. Maybe us having good automation facilitated that.
+- problem of tests getting longer is less visible, when you have lots of smaller applications
+- create a series of blog post leading up to, and expanding upon (and describing in detail) the techniques presented in the talk
+- small commits from time to time event if features are not finished (e.g. commit tests first, then implementation); code is changing, it's OK to leave notes in the code in the middle of implementing a bigger feature
+- talk about migrations and updating the data and code in separate pushes
+- talk about terraform for the API
+- CD makes it easy to iterate fast, thus making it easier to quickly improve interfaces between apps. That is, for example, quickly adjusting backend endpoints to the needs and workflow of the front end app
+- push the angle that we are a startup, we don't have a perfect pipeline, but we did manage to keep the quality high even with a startup style and multiple projects
+
+Something about our data pipelines.
+
+TODO Prerequisits, GOALS
+
+We're a small company building an ambitious, data-centric project.
+
+Feature flags
+
+We're missing some stuff on the testing and process side, but we're constantly adapting our processes while developing our product and adding features.
+
+gradual changes

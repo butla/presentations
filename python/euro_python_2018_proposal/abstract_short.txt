@@ -1,0 +1,14 @@
+Do you feel it takes you too long to push code to production?
+
+Are you afraid that this code will break something?
+
+Maintaining a network of cooperating cloud apps is giving you PTSD?
+
+The promise of continuous delivery is that you'll be able to answer "no" to all these questions.
+
+We’ll show you how to achieve it with:
+
+- full deployment automation
+- trunk-based development
+- advanced local component tests with Docker Compose
+- and more

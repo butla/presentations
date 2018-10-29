@@ -1,0 +1,46 @@
+- Does it take you too long to push a single new line of code into production?
+
+- Are you always afraid a one line change will break something?
+
+- Does maintaining an architecture of interdependent applications, workers and data sources feel like a bug-filled horror?
+
+
+The promise of continuous delivery is that you'll be able to answer "no" to all these questions.
+
+
+But how can you implement it? Doesn't it require a large, mature organization, an army of experts, and a couple of months doing nothing but updating processes? Well, no. Our small company implemented this while continuing to deliver value to our customers.
+
+
+We didn't just do it for bragging rights, we did it to make our lives easier and improve the quality of our product.  Four years of building and running data pipelines taught us the advantages of continuous delivery.
+
+
+In this presentation we'll show you specific processes and techniques that allowed us to deliver our software continuously (i.e. multiple production deployments per day). These include:
+
+
+- full deployment/infrastructure automation on AWS (with Terraform and Jenkins)
+
+- prod/dev/test parity for environments
+
+- trunk-based development (with feature flags)
+
+- considering testability during design
+
+- advanced local component tests with Docker Compose
+
+- separation of code and database changes
+
+- gradual process improvement
+
+- alerting / logging / metrics
+
+
+We battle-tested these methods at Iterio Data while developing our analytics and data warehousing platform.  It runs on AWS and the backend is beautiful Python.
+
+
+Structure:
+- Intro to explain concepts (~10 minutes)
+- Live demo, including deployment to production, oh yes (~15 minutes)
+- Summary & closing remarks (~ 5 minutes)
+
+
+

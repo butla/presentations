@@ -1,0 +1,3 @@
+Challenges of continuous delivery in the cloud
+
+Continuous delivery in the cloud

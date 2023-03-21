@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "developer-workflow-with-local-tests-using-docker-compose"
+version = "0.1.0"
+description = "A presentation"
+authors = ["Michal Bultrowicz <michal.bultrowicz@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "developer_workflow_with_local_tests_using_docker_compose"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+darkslide = "^6.0.0"
+watchdog = "^3.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

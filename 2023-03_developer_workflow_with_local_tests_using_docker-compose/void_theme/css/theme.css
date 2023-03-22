@@ -32,7 +32,10 @@ body, header {
     font-family: 'Candara', 'Alegreya Sans', 'Trebuchet Ms', 'Segoe UI', sans-serif;
 }
 section {
-    font-family: 'Palatino', 'Palatino Linotype', 'URW Palladio L', 'Century Schoolbook L', 'Georgia', serif;
+    /*font-family: 'Palatino', 'Palatino Linotype', 'URW Palladio L', 'Century Schoolbook L', 'Georgia', serif;*/
+    font-family: 'Candara', 'Alegreya Sans', 'Trebuchet Ms', 'Segoe UI', sans-serif;
+    /* font-size: 3.5em; */
+    font-size: 3em;
 }
 
 /* ======================================

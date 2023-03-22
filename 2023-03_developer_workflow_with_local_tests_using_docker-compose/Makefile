@@ -4,4 +4,9 @@ build:
 
 .PHONY: build_continuously
 build_continuously:
-	poetry run darkslide -w slides.md --theme void_theme
+	# `darkslide -w` starts looping continuously
+	fd '.rst|.md' | entr -c make build
+
+.PHONY: setup_dev
+setup_dev:
+	poetry install

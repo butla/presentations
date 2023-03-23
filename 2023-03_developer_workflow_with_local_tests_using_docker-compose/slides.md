@@ -1,6 +1,11 @@
+---
+theme: default
+layout: cover
+---
+
 # Developer workflow with local tests using Docker Compose
 
-Michał Bultrowicz
+## Michał "Butla" Bultrowicz
 
 https://bultrowicz.com
 
@@ -8,13 +13,15 @@ https://witchsoft.com
 
 https://twitter.com/mmmbultrowicz
 
-# Presenter notes
+https://www.instagram.com/mmmbultrowicz/
 
+<!--
 Tutaj zrobić tyci wprowadzenia o mnie?
+-->
 
 ---
 
-# About me (TODO - wywal, chyba)
+# About me (TODO - zostaw na pykonik)
 
 - mainly worked on Python back-ends
 - quality assurance
@@ -23,33 +30,32 @@ Tutaj zrobić tyci wprowadzenia o mnie?
 - Java, C++, C# in the past
 - I plan to post more educational material in the future
 
-# Presenter notes
+<!--
 Tytuł wymyśliłem. Ale wszystkie są zmyślone, a część jest rozdmuchana.
 Chief Executive Officer. Pffft... Po prostu "szef" nie można?
 
 Będę potem wrzucał jakieś filmiki techniczne na jutuby, produkował w formie tekstowej na bloga,
 i w formie jakiegoś minimalnego shitcontentu na Twittera i Instagrama :)
+-->
 
 ---
 
 # What's a container?
 
-It contains the application code, and all the libraries and system components it requires.
-Except for the Linux kernel.
-
-It runs on the host's kernel, in a process namespace separated from the host's processes.
-
-Windows and MacOS need a Linux VM to use containers.
+- It contains:
+  - application code
+  - system components (e.g. libraries) required by the app code
+  - doesn't contain a Linux kernel.
+- It runs on the host's kernel, in a process namespace separated from the host's processes.
+- Windows and MacOS need a Linux VM to use containers.
 
 ---
 
 # Docker and Docker Compose
 
-Docker: an implementation of containers.
-
-There are more container technologies, e.g. Podman.
-
-Docker Compose: defining a set of containers cooperating with each other.
+- Docker: an implementation of containers.
+- There are more container technologies, e.g. Podman.
+- Docker Compose: describe and run set of Docker containers.
 
 ---
 
@@ -59,15 +65,11 @@ Docker Compose: defining a set of containers cooperating with each other.
 - faster development by enabling local experimentation
 - easier on-boarding of new team members
 
-# Presenter notes
+<!--
+What will you gain if you use the techniques from this presentation?
 
-Not being able to play with the app is a huge detriment.
-You will have more bugs, longer development time.
-
-Best thing is a local setup, without the need for internet even (working on the train can be quite effective).
-Some dev instance (or spawnable instances, maybe with Helm) is good.
-Anything that the developer can change and observe.
-But local ones are the easiest/fastest to work with. And cheapest :)
+More info when we get to specifics.
+-->
 
 ---
 
@@ -87,8 +89,10 @@ Satisfy `git pull && make run` requirement.
 
 Waiting for the DB to get up in the migrations.
 
-# Presenter notes
+Migracje traktować ogólnie. Mało pythona.
+Migracje muszą czekać na bazę, bo to, że się odpali kontener nie znaczy, że baza jest gotowa.
 
+<!--
 Najpierw, jakaś przykładowa aplikacja - API, baza danych, migracje
 Buduj ją z testami od razu.
 Pokaż odpalanie jedną komendą
@@ -99,6 +103,23 @@ Ok, let's write down the command to do it.
 Now everybody will be able to run it.
 
 Stopniowo przechodź przez wszystkie obiecane tematy.
+-->
+
+---
+
+# Interactive test setup
+
+Not being able to play with the app is a huge detriment.
+You will have more bugs, longer development time.
+
+---
+
+# Local vs. remote test setup
+
+Best thing is a local setup, without the need for internet even (working on the train can be quite effective).
+Some dev instance (or spawnable instances, maybe with Helm) is good.
+Anything that the developer can change and observe.
+But local ones are the easiest/fastest to work with. And cheapest :)
 
 ---
 
@@ -120,8 +141,7 @@ Techniques:
   mark destructive ones with pytest-mark;
   destructive example: graceful app shutdown
 
-# Presenter notes
-
+<!--
 ### Single command to run the app locally
 Aplikacja też powinna być budowana do dockera.
 
@@ -222,3 +242,4 @@ and it looks like the code using the [functions framework](https://cloud.google.
 can run locally.
 
 ### Mountebank
+-->

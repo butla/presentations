@@ -1,12 +1,12 @@
 .PHONY: build
 build:
-	poetry run darkslide slides.md --theme void_theme
+	npx slidev export --dark slides.md
 
-.PHONY: build_continuously
-build_continuously:
-	# `darkslide -w` starts looping continuously
-	fd '.rst|.md' | entr -c make build
+.PHONY: run
+run:
+	npx slidev slides.md
 
 .PHONY: setup_dev
 setup_dev:
-	poetry install
+	# poetry install
+	npm install

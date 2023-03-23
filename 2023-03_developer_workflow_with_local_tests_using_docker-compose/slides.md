@@ -73,6 +73,11 @@ TODO NEXT slide - add Dockerfile, then docker-compose
 <!--
 Step 1: app plus database migrations - how do I run that?
 
+When using some popular framework like Django in Python, you would just write tests that use some in-memory DB,
+or SQLite.
+why is it bad to not have a real dB? you don't use the real thing. you can be surprised after you deploy, cause in reality the app will behave differently. You don't use the full power of y
+our tools. Like triggers or functions.
+
 Don't show the code when it's not necessary.
 Focus on the test code and ideas behind it.
 

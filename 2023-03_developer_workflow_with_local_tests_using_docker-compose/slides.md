@@ -1,6 +1,7 @@
 ---
 theme: default
 layout: cover
+exportFilename: "developer_workflow_with_local_tests_using_docker_compose.pdf"
 ---
 
 # Developer workflow with local tests using Docker Compose
@@ -21,25 +22,6 @@ Tutaj zrobić tyci wprowadzenia o mnie?
 
 ---
 
-# About me (TODO - zostaw na pykonik)
-
-- mainly worked on Python back-ends
-- quality assurance
-- data engineering
-- tech leadership
-- Java, C++, C# in the past
-- I plan to post more educational material in the future
-
-<!--
-Tytuł wymyśliłem. Ale wszystkie są zmyślone, a część jest rozdmuchana.
-Chief Executive Officer. Pffft... Po prostu "szef" nie można?
-
-Będę potem wrzucał jakieś filmiki techniczne na jutuby, produkował w formie tekstowej na bloga,
-i w formie jakiegoś minimalnego shitcontentu na Twittera i Instagrama :)
--->
-
----
-
 # What's a container?
 
 - It contains:
@@ -48,6 +30,10 @@ i w formie jakiegoś minimalnego shitcontentu na Twittera i Instagrama :)
   - doesn't contain a Linux kernel.
 - It runs on the host's kernel, in a process namespace separated from the host's processes.
 - Windows and MacOS need a Linux VM to use containers.
+
+<!--
+The target audience knows about Docker, but I'll explain in short just in case.
+-->
 
 ---
 
@@ -61,7 +47,7 @@ i w formie jakiegoś minimalnego shitcontentu na Twittera i Instagrama :)
 
 # Why have local tests with containers?
 
-- higher probability that app really works vs. mock-only testing
+- higher probability that app really works vs. tests with mocks and in-memory fakes
 - faster development by enabling local experimentation
 - easier on-boarding of new team members
 
@@ -75,25 +61,31 @@ More info when we get to specifics.
 
 # The sample app (TODO)
 
-Python REST API with an SQL database.
+Python REST API with an SQL database and migrations.
 
-TODO prepare... experiments? Testing sample app?
+How do I run it?
+
+Framework might give me some command to run it with some sqliteDB or some fake in memory thing.
+We don't want that.
+
+TODO NEXT slide - add Dockerfile, then docker-compose
+
+<!--
+Step 1: app plus database migrations - how do I run that?
+
 Don't show the code when it's not necessary.
 Focus on the test code and ideas behind it.
 
-Show the code file, the migrations.
-
-Run it locally, show how to set it up with Docker.
 Ping it to demonstrate it's working. We did a basic local test now.
 Satisfy `git pull && make run` requirement.
 
 Waiting for the DB to get up in the migrations.
 
+Functional tests should wait for the app as well - tenacity.
+
 Migracje traktować ogólnie. Mało pythona.
 Migracje muszą czekać na bazę, bo to, że się odpali kontener nie znaczy, że baza jest gotowa.
 
-<!--
-Najpierw, jakaś przykładowa aplikacja - API, baza danych, migracje
 Buduj ją z testami od razu.
 Pokaż odpalanie jedną komendą
 Pokaż przykłady jednostkowych, zintegrowanych, external (na cały feature).
@@ -107,10 +99,13 @@ Stopniowo przechodź przez wszystkie obiecane tematy.
 
 ---
 
-# Interactive test setup
+# Interactive app setup
 
 Not being able to play with the app is a huge detriment.
 You will have more bugs, longer development time.
+
+At least have something somewhere running that people can change and observe.
+Best if it's local and doesn't need Internet connectivity.
 
 ---
 

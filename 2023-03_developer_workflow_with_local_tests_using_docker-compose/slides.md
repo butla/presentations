@@ -8,16 +8,23 @@ exportFilename: "developer_workflow_with_local_tests_using_docker_compose.pdf"
 
 ## Michał "Butla" Bultrowicz
 
-https://bultrowicz.com
+Primary Software Wizard
+
+<br/>
 
 https://witchsoft.com
 
-https://twitter.com/mmmbultrowicz
-
-https://www.instagram.com/mmmbultrowicz/
+https://bultrowicz.com
 
 <!--
-Tutaj zrobić tyci wprowadzenia o mnie?
+I'm Michał, I'm the Primary Software Wizard at WitchSoft, my company.
+The title is not more made up and pompous that something like "Chief Executive Officer".
+
+In the recent past I did hollistic backends (with testing, reliability, infrastructure, etc.),
+now I'm trying to start a business providing software directly to people.
+
+I have twitter and everything, it's on the site.
+
 -->
 
 ---
@@ -78,6 +85,17 @@ or SQLite.
 why is it bad to not have a real dB? you don't use the real thing. you can be surprised after you deploy, cause in reality the app will behave differently. You don't use the full power of y
 our tools. Like triggers or functions.
 
+real app won't reset its database every call - your functional tests shouldn't too.
+Integration ones as well.
+You have some wiggle room to configure them, though. You can be creating a new org for every test.
+You can create one, and add all the data to it. Or you can do anything in between.
+Maximize chaos, but allow yourself to have the precision when you need to (e.g. be able to test a clean start,
+but have the default a bit more messy and realistic).
+
+Not all frameworks have tight DB integration and fakes. With this you can test everything.
+
+Prawdziwa baza i nawarstwianie danych dają trochę chaosu, który czasem zrobi dziwny problem - tym samym symulując prawdziwy deployment
+
 Don't show the code when it's not necessary.
 Focus on the test code and ideas behind it.
 
@@ -120,6 +138,17 @@ Best thing is a local setup, without the need for internet even (working on the 
 Some dev instance (or spawnable instances, maybe with Helm) is good.
 Anything that the developer can change and observe.
 But local ones are the easiest/fastest to work with. And cheapest :)
+
+---
+
+# Podział testów
+
+- unit - klasyczne testy jednostkowe
+- integrated - używanie wewnętrznych interfejsów kodu w połączeniu z zewnętrznymi systemami;
+  np. klasa repozytorium + prawdziwa baza danych)
+- external - cały artefakt, konfiguracja produkcyjna albo tak blisko tej konfiguracji jak się da
+
+TODO - link do artykułu
 
 ---
 

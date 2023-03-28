@@ -66,9 +66,10 @@ More info when we get to specifics.
 
 ---
 
-# The sample app (TODO)
+# The example app (TODO)
 
-Python REST API with an SQL database and migrations.
+Python REST API backed by an SQL database.
+Requires migrations to run on the DB.
 
 How do I run it?
 
@@ -156,10 +157,15 @@ TODO - link do artykułu
 
 Techniques:
 - organizing the project so that a local instance of the app can be run with two commands: `git clone && make run`
+  - compose/config env vars
 - separation of unit, integrated, and functional tests (explain them)
 - not resetting the test environment between tests
 - local and CI test parity
+  - overridey w dockerze? coś było z nimi
+  - CI też odpala makefile
 - debugging code running in containers
+  - podpięcie się ręczne
+  - podpięcie się z Pycharmem
 - using "Docker mounts" to enable fast application reloading while editing code
 - changes to the production code that make testing easier (configurable wait times, launching coverage)
 

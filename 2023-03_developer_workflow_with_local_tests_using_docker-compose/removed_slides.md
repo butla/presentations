@@ -27,7 +27,15 @@ i w formie jakiegoś minimalnego shitcontentu na Twittera i Instagrama :)
 
 ---
 
-# Czemu lepiej lokalnie? (TODO)
+# Local vs. remote test setup
+
+At least have something somewhere running that people can change and observe.
+Best if it's local and doesn't need Internet connectivity.
+
+Best thing is a local setup, without the need for internet even (working on the train can be quite effective).
+Some dev instance (or spawnable instances, maybe with Helm) is good.
+Anything that the developer can change and observe.
+But local ones are the easiest/fastest to work with. And cheapest :)
 
 <!--
 Które z tych rzeczy to zasługa lokalności? Które dzięki dockerowi?
@@ -39,3 +47,4 @@ What will you gain if you use the techniques from this presentation?
 More info when we get to specifics.
 -->
 
+---

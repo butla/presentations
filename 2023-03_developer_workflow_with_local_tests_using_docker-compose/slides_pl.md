@@ -4,7 +4,7 @@ layout: cover
 exportFilename: "dev_workflow_with_local_tests_using_docker_compose.pdf"
 ---
 
-# Developer workflow with local tests using Docker Compose
+# Lokalne testy z docker-compose a praca programisty
 
 ## Michał "Butla" Bultrowicz
 
@@ -17,6 +17,12 @@ https://witchsoft.com
 https://bultrowicz.com
 
 <!--
+Cześć, nazywam się Michał Bultrowicz.
+Rozkręcam swoją firmę.
+Wcześniej budowałem backendy dla innych, razem z testami, infrastrukturą, metrykami, alertami, itp.
+
+(other version)
+
 I'm Michał, I'm the Primary Software Wizard at WitchSoft, my company.
 
 The title is not more made up and pompous that something like "Chief Executive Officer", I think.
@@ -26,6 +32,12 @@ now I'm trying to start a business providing software directly to end-users.
 
 I have twitter and everything, it's on my website. I hope to put out more educational "content" in the future.
 -->
+
+---
+layout: center
+---
+
+Slajdy + notatki: [https://github.com/butla/presentations](https://github.com/butla/presentations/tree/master/2023-03_developer_workflow_with_local_tests_using_docker-compose)
 
 ---
 
@@ -52,7 +64,7 @@ A short but more technical answer
 
 # Docker i Docker Compose
 
-- Docker: implementacja kontenerów.an implementation of containers.
+- Docker: implementacja kontenerów.
 - Jest więcej implementacji, np. [Podman](https://podman.io/).
 - Docker Compose: pozwala opisać i zarządzać grupą powiązanych kontenerów.
 
@@ -78,15 +90,10 @@ Endpointy API:
 <!--
 Apka moja pod linkiem. Znajdziecie tam trochę więcej szczegółów niż zawarłem na prezentacji.
 
-Zamiast Postgresa mógłby być jakiś inny system, lub kilka. Kafka, Redis, Elastic, coś innego.
-Metodami, które pokażę można je wszystkie ogarnąć.
-
 Doesn't even have update - that bare-bones.
 
 TODO: mermaid diagram with images?
 https://github.com/mermaid-js/mermaid/issues/548
-
-There might be two slides before this.
 -->
 
 ---
@@ -234,12 +241,13 @@ layout: cover
 
 - używanie wewnętrznych interfejsów kodu (jak testy jednostkowe)
 - wykorzystanie zewnętrznych systemów (np. PostgreSQL z kontenera)
+- nie potrzeba mocków
 
 ```python
 def test_create_a_note():
     # arrange
-    note_contents = "I'm a note, wee!"
-    notes_repo = NotesRepository(...)
+    note_contents = f"I'm a note, wee! {uuid.uuid4()}"  # some randomness
+    notes_repo = NotesRepository(...)  # object that connects to the DB
 
     # act
     id = notes_repo.create(note_contents)  # calls out to Postgres at localhost:5432
@@ -255,23 +263,75 @@ def test_create_a_note():
 Kod w samplu trochę inny.
 
 Po prostu odpalamy objekt, który normalnie wołał by bazę i to robi.
+
+Tak wytestowany obiekt Repository można zastępować przez dependency injection w testach jednostkowych.
 -->
 
 ---
 
-# Testy zewnętrzne (external)
+# Testy zewnętrzne (external; aka. functional/e2e)
 
-- używanie tylko zewnętrznych interfejsów aplikacji (np. HTTP)
+- używanie tylko zewnętrznych interfejsów (np. HTTP)
 - konfiguracja maksymalnie zbliżona do produkcyjnej
-- kompletne scenariusze używania aplikacji
 - trudniejsze w debugu, trzeba zaglądać do logów kontenerów
 
-TODO - sample code
+```python
+import uuid, httpx
+
+def test_store_and_retrieve_note(app_url):  # a more elaborate scenario
+    note_contents = f"a note {uuid.uuid4()}"  # some randomness
+
+    create_result = httpx.post(f"{app_url}/notes/", json={"contents": note_contents})  # calling the app in Docker
+    assert create_result.json()["contents"] == note_contents
+    note_id = create_result.json()["id"]
+
+    get_by_id_result = httpx.get(f"{app_url}/notes/{note_id}/")
+    assert get_by_id_result.json()["contents"] == note_contents
+
+    get_all_result = httpx.get(f"{app_url}/notes/")
+    # finding the new note among all notes
+    assert next(note for note in get_all_result.json() if note["id"] == note_id)
+```
 
 <!--
 Name is something I use. I feel it's more precise than saying functional, or component, or end-to-end tests.
 
-Functional tests should wait for the app as well - tenacity.
+Pełny scenariusz akceptacyjny:
+- tworzymy notkę
+- pobieramy notkę po ID
+- zayważamy, że notka jest w grupie wszystkich notek
+-->
+
+---
+
+# Brakujący kod z poprzedniego slajdu
+
+```python
+import uuid, httpx, pytest, tenacity
+
+# Session scope ensures we wait only once per test suite run.
+@pytest.fixture(scope="session")
+def app_url():
+    app_address = "http://localhost:8080"
+    _wait_for_http_url(app_address)
+    return app_address
+
+# Call the app until it returns correctly or times out.
+@tenacity.retry(stop=tenacity.stop_after_delay(10), wait=tenacity.wait_fixed(0.2), reraise=True)
+def _wait_for_http_url(url: str):
+    result = httpx.get(url)
+    if result.status_code != 200:
+        raise ValueError("App returned the wrong status code")
+
+def test_store_and_retrieve_note(app_url):
+    ...
+```
+
+<!--
+Możemy robić więcej testów.
+
+Czekanie przyda się jeśli apka wstaje wolno (lepiej tego unikać),
+lub gdy będziemy przeładowywać kod i puszczać testy przy zmianach plików.
 -->
 
 ---
@@ -279,7 +339,9 @@ Functional tests should wait for the app as well - tenacity.
 # Testy zintegrowane i zewnętrzne - co dostajemy?
 - dowód, że aplikacja rzeczywiście uruchamia się i działa
 - mniej pracy niż ustawianie mocków
-- odblokowanie pełnej mocy narzędzi, przez umożliwienie testowania
+- swoboda w korzystaniu z pełnej mocy narzędzi
+- wolniejsze niż jednostkowe, nadal szybkie
+- ⚠️ brak pełnej izolacji między testami
 
 <!--
 Większa pewność: jeśli używasz jakiś testowych zastępników od frameworka, albo np. lokalnej bazy SQLite,
@@ -290,117 +352,228 @@ I coś kiedyś zaskoczy po deploymencie (pół biedy, jeśli będzie to DEV).
 Mocki: mniej pracy - szybsza iteracja.
 
 odblokowanie mocy - np testowanie indeksów, triggerów, itp.
-Triggery są trochę kontrowersyjne.
-Ale jeśli możemy coś testować, to z większą pewnością możemy wpleść to w system.
-Albo w ogóle dopiero wtedy się na to odważymy.
+Jeśli możemy coś testować, to z większą pewnością możemy wpleść to w system.
+Większe poleganie na zewnętrznych systemach, mniej kodu przez to.
 
 Not all frameworks have tight DB integration and fakes. With this you can test everything.
 -->
 
 ---
 
-# Odrobina chaosu - większy realizm
+# Brak izolacji - odrobina chaosu
 
-- reset między każdym testem niepraktyczny ze względu na czas
-- stan systemu nie jest resetowany
-  - niektóre testy (np. daj wszystkie notki) muszą brać na to poprawkę
-- natkniemy się na więcej błędów lokalnie - nie dojdą na produkcję
-
+- reset danych między każdym testem może być niepraktyczny
+  - za wolny dla SQL
+  - dla Redisa znośny (ale uniemożliwia równoległe testy)
+- niektóre testy (np. daj wszystkie notki) muszą brać na to poprawkę
+  - kolekcje nie będą stałe
+  - dobrze tworzyć odizolowane grupy danych
+- losowe problemy będą irytować
 
 <!--
-real app won't reset its database every call - your functional tests shouldn't too.
-Integration ones as well.
+Tests for things like retrieving the entire collection of objects need to ensure that the new items need to
+be there, not match the whole retrieved collection.
+This technique also helps with making tests more independent of each other, so they can be run out-of-order
+(that sometimes creeps in into test-suites) and parallelised
+
+Odizolowane grupy danych - nowa organizacja.
 You have some wiggle room to configure them, though. You can be creating a new org for every test.
 You can create one, and add all the data to it. Or you can do anything in between.
+
 Maximize chaos, but allow yourself to have the precision when you need to (e.g. be able to test a clean start,
 but have the default a bit more messy and realistic).
 
-Prawdziwa baza i nawarstwianie danych dają trochę chaosu, który czasem zrobi dziwny problem - tym samym symulując prawdziwy deployment
-
-- Many flaky tests showed me real race conditions.
-- tests for things like retrieving the entire collection of objects need to ensure that the new items need to
-  be there, not match the whole retrieved collection.
-  This technique also helps with making tests more independent of each other, so they can be run out-of-order
-  (that sometimes creeps in into test-suites) and parallelised
-- a volume in docker-compose needed for persistence;
-  if you get weird issues and can't figure them out, try docker-compose down -v to clear out everything.
-  But remember - maybe that issue can happen in production? Although local instances have a lot of garbage data.
-
-TODO ogarnij te notki
+Może dodatkowy slajd o tym, jak sobie z tym radzić:
+- Czekanie na rzeczy asynchroniczne.
+- założenie, że nowe elementy kolekcji mogą się pojawiać w dowolnym momencie
 -->
 
 ---
 
-# Test organization
+# Orobina chaosu - większy realizm
 
-Three separate folders.
-Link the article. Mention the whys of the separation.
-
-TODO
-
----
-
-# Przeładowywanie kodu w kontenerze
-
-- using "Docker mounts" to enable fast application reloading while editing code
-  - pokaż odpalanie z entr jak się ma mounta (oczywiście można używać jakiś wewnętrznych frameworkowych rozwiązań,
-    ale czasem są źle napisane, mielą procem. No i wymagają zmieniania konfiguracji apki, przez co odchodzi
-    od wartości produkcyjnych)
-- Nie dawałbym live reload w wersji produkcyjnej, tylko.
-- (reloading) Tutaj też pokaż overloading domyślnego polecenia w compose dla potrzeb developmentu.
-
-TODO
-
----
-
-# Testy lokalne a CI
-
-- CI powinien "reużywać" Makefile
-- TODO pokaż `make check`
-- może odpalać podkomendy równolegle w różnych stepach i ładnie je przedstawiać w CI
-- docker-override z mountem może być usuwany w CI
-- dobrze jak jest docker-in-docker w runnerach, żeby nie było konfliktów na portach;
-  w innym przypadku trzeba pokombinować, brać jakieś wolne i wstrzykiwać je w docker-compose i w inne miejsca
-  Można np zrobić override z portami.
-- So build image first, then run functional tests with it. Might be done with override, pulling the image first.
-
----
-
-# Debug kodu w kontenerze
-
-- debugging code running in containers
-  - podpięcie się ręczne
-  - podpięcie się z Pycharmem
-
----
-
-# Zmiany kodu produkcyjnego dla ułatwienia testowania
-
-- configurable wait times
-- launching coverage
-- Test-enabling code can be a part of the product. Testability is a feature.
-- if you can't implement some needed tests without changing the code, then change the code.
-  Add a special endpoint, or whatever.
-  You might want to hide them behind a feature flag. Or maybe not - testing in production has its place.
-
-TODO maybe cut
-
----
-layout: center
----
-
-Fin
+- wersja produkcyjna nie czyści co chwilę bazy
+- naprawianie losowych problemów zwiększy jakość
+- wyłapywanie błędów przed produkcją:
+  - rosnące, stare dane
+  - "flaky" testy wskazują na wyścigi
+- ewentualnie można czyścić lokalną bazę: `docker-compose down -v`
 
 <!--
-Some additional tools:
+Prawdziwa baza i nawarstwianie danych dają trochę chaosu,
+który czasem zrobi dziwny problem - tym samym symulując prawdziwe środowisko
 
-## Localstack
+Realism: real app won't reset its database after every operationevery call - your functional tests shouldn't too.
+Integration ones as well.
+
+Many flaky tests showed me real race conditions.
+
+A volume in docker-compose needed for persistence;
+if you get weird issues and can't figure them out, try docker-compose down -v to clear out everything.
+But remember - maybe that issue can happen in production? Although local instances have a lot of garbage data.
+-->
+
+---
+
+# Organizacja testów
+
+```
+project_root/
+├── ...
+└── tests
+    ├── external
+    │   └── ...
+    ├── integrated
+    │   └── ...
+    └── unit
+        └── ...
+```
+
+<br/>
+
+- jawny podział
+- ilość wysokopoziomowych testów trzeba kontrolować
+- łatwość puszczania szybszych podgrup
+
+<!--
+It makes the team mindful about the category that each test falls under.
+
+We need to be mindful of the categories, because the higher levels of tests are more time-consuming.
+When you need to make the test suite faster, the starting point can be looking at the higher level tests and checking
+whether they can't be replaced with lower level tests.
+
+A test should be the lowest level that fulfills the job.
+If you can check what you want about the code without poking a database, then do it
+(meaning write a unit test instead of an integrated test).
+-->
+
+---
+
+# Działa dla złożonych aplikacji
+
+- sprawdzone w bojach (trzy firmy)
+- integracja innych systemów (Kafka, Redis, Rabbit)
+- AWS lokalnie - [Localstack](https://localstack.cloud/)
+- udawanie innych REST API - [Mountebank](http://www.mbtest.org/)
+
+<!--
+Zamiast Postgresa mógłby być jakiś inny system, lub kilka. Kafka, Redis, Elastic, coś innego.
+Metodami, które pokażę można je wszystkie ogarnąć.
+
 Only for AWS.
 Azure has some local emulation https://learn.microsoft.com/en-us/answers/questions/579764/local-development-with-azure-services-specifically
 
 GCP has [some emulators](https://cloud.google.com/sdk/gcloud/reference/beta/emulators)
 and it looks like the code using the [functions framework](https://cloud.google.com/functions/docs/functions-framework)
 can run locally.
-
-## Mountebank
 -->
+
+---
+layout: two-cols
+---
+
+<template v-slot:default>
+
+# Przeładowywanie kodu w kontenerze
+
+```yaml
+# docker-compose.override.yml
+---
+version: '3'
+
+services:
+
+  api:
+    volumes:
+      # local folder mounted into the container
+      - ./sample_backend/:/app/sample_backend/
+```
+
+```makefile
+# Makefile
+run_reloading: run
+	fd --exclude .git --no-ignore '\.py$$' sample_backend \
+		| entr -c make _start_compose
+
+test_reloading:
+	fd --exclude .git --no-ignore '\.py$$' \
+		| entr -c make test
+```
+
+</template>
+
+<template v-slot:right>
+
+<br/><br/>
+
+- nie trzeba przebudowywać Dockera
+- aplikacja w Dockerze odświeża się przy zmianie pliku
+- [entr](https://bultrowicz.com/universal_reload_with_entr/)
+- [fd](https://github.com/sharkdp/fd)
+
+</template>
+
+<!--
+Zamiast entr dla przeładowywania aplikacji można użyć czegoś innego.
+Wiele frameworków ma opcję reload.
+
+Entr jest uniwersalny.
+-->
+
+---
+
+# Testy lokalne a CI
+
+- CI usuwa `docker-compose.override.yml` - na wszelki wypadek
+- CI używa tego samego Makefile'a
+- zbuduj obraz Dockerowy, wypchnij do repo
+- self-hosted runners mogą mieć problemy z portami (do obejścia)
+
+TODO dodaj wstrzykiwalne porty w docker-compose
+
+<!--
+- dobrze jak jest docker-in-docker w runnerach, żeby nie było konfliktów na portach;
+  w innym przypadku trzeba pokombinować, brać jakieś wolne i wstrzykiwać je w docker-compose i w inne miejsca
+  Można np zrobić override z portami.
+- So build image first, then run functional tests with it. Might be done with override, pulling the image first.
+
+self-hosted runners - jeśli nie ma izolacji sieci między uruchomieniami testów, to będą konflikty na portach
+Można generować losowe porty
+-->
+
+---
+
+# Testy lokalne a CI - kompozycja poleceń w Makefile
+
+- kompozycja poleceń w Makefile
+  - TODO pokaż `make check`
+- może odpalać podkomendy równolegle w różnych stepach i ładnie je przedstawiać w CI
+
+TODO
+
+---
+
+# Obiecany, ale pominięty materiał
+
+- debug kodu w kontenerze
+  - [CLI](https://github.com/butla/bultrowicz.com/blob/master/unfinished_articles/debugging_python_in_docker_with_cli.rst)
+  - IDE, e.g. [Intellij/Pycharm](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html#run)
+- zmiany kodu produkcyjnego dla ułatwienia testowania
+  - każdy sleep w apce konfigurowalny, małe wartości dla testów
+  - to w porządku dodawać funkcjonalność dla ułatwienia testów
+  - ...inne...
+
+<!--
+- configurable wait times
+- launching coverage
+- Test-enabling code can be a part of the product. Testability is a feature.
+- if you can't implement some needed tests without changing the code, then change the code.
+  Add a special endpoint, or whatever.
+  You might want to hide them behind a feature flag. Or maybe not - testing in production has its place.
+-->
+
+---
+layout: center
+---
+
+Fin

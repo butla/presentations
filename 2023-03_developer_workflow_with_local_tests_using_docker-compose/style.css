@@ -6,4 +6,14 @@
   ul {
     font-size: 25px
   }
+
+  /* disable ligatures */
+  font-variant-ligatures: none;
+
+  /* Don't have visible backticks in monospace text:
+   * TODO it makes the text overflow the background on the left...*/
+  /* :not(pre) > code::before, */
+  /* :not(pre) > code::after { */
+  /*   content: ""; */
+  /* } */
 }

@@ -195,7 +195,11 @@ _db_migration:
 
 <!--
 Jeśli nie lubicie Make'a, to możecie mieć jakiś inny centralny skrypt z komendami potrzebnymi w developmencie.
-Make jest spoko, bo ma shell completions.
+Make jest spoko, bo ma shell completions i jest wszędzie.
+
+Targety z podkreśleniami nie będą podpowiadane przez completions. Nie trzeba eksponować wszystkich komend.
+
+Polecam nagłówek mieć.
 
 Używam narzędzi pythonowych, ale w waszej technologii może to wyglądać inaczej.
 Musi być coś do odpalenia migracji.
@@ -332,12 +336,48 @@ Możemy robić więcej testów.
 
 Czekanie przyda się jeśli apka wstaje wolno (lepiej tego unikać),
 lub gdy będziemy przeładowywać kod i puszczać testy przy zmianach plików.
+
+Podobne czekanie można wstrzyknąć w migracje (wcześniej mówiłem, że trzeba to do nich dodać).
 -->
 
 ---
 
+# Uruchamianie testów
+
+```makefile
+SOURCES:=sample_backend tests
+
+check: static_checks test
+
+# SUBCOMMANDS =====
+test:
+	@echo === Running tests... ===
+	@poetry run pytest tests
+
+static_checks: _check_isort _check_format _check_linter _check_types
+
+_check_isort:
+	@echo === Checking import sorting... ===
+	@poetry run isort -c $(SOURCES)
+
+_check_format:
+	@echo === Checking code formatting... ===
+	@poetry run black --check $(SOURCES)
+
+...
+```
+
+<br/>
+
+```bash
+$ make check
+```
+
+---
+
 # Testy zintegrowane i zewnętrzne - co dostajemy?
-- dowód, że aplikacja rzeczywiście uruchamia się i działa
+- dowód, że aplikacja się uruchamia
+- większa pewność, że działa
 - mniej pracy niż ustawianie mocków
 - swoboda w korzystaniu z pełnej mocy narzędzi
 - wolniejsze niż jednostkowe, nadal szybkie
@@ -366,7 +406,7 @@ Not all frameworks have tight DB integration and fakes. With this you can test e
   - za wolny dla SQL
   - dla Redisa znośny (ale uniemożliwia równoległe testy)
 - niektóre testy (np. daj wszystkie notki) muszą brać na to poprawkę
-  - kolekcje nie będą stałe
+  - kolekcje "wszystkich elementów" będą zmienne
   - dobrze tworzyć odizolowane grupy danych
 - losowe problemy będą irytować
 
@@ -393,10 +433,10 @@ Może dodatkowy slajd o tym, jak sobie z tym radzić:
 # Orobina chaosu - większy realizm
 
 - wersja produkcyjna nie czyści co chwilę bazy
-- naprawianie losowych problemów zwiększy jakość
 - wyłapywanie błędów przed produkcją:
-  - rosnące, stare dane
-  - "flaky" testy wskazują na wyścigi
+  - baza rośnie
+  - "flaky" testy wskazują wyścigi
+- naprawianie losowych problemów zwiększy jakość
 - ewentualnie można czyścić lokalną bazę: `docker-compose down -v`
 
 <!--
@@ -451,8 +491,8 @@ If you can check what you want about the code without poking a database, then do
 
 # Działa dla złożonych aplikacji
 
-- sprawdzone w bojach (trzy firmy)
-- integracja innych systemów (Kafka, Redis, Rabbit)
+- sprawdzone w bojach (trzy różne firmy)
+- integracja innych systemów (Kafka, Redis, Rabbit, itp.)
 - AWS lokalnie - [Localstack](https://localstack.cloud/)
 - udawanie innych REST API - [Mountebank](http://www.mbtest.org/)
 
@@ -467,6 +507,85 @@ GCP has [some emulators](https://cloud.google.com/sdk/gcloud/reference/beta/emul
 and it looks like the code using the [functions framework](https://cloud.google.com/functions/docs/functions-framework)
 can run locally.
 -->
+
+---
+layout: cover
+---
+
+# Continuos Integration / Delivery
+
+---
+
+# Organizacja CI
+
+- CI usuwa `docker-compose.override.yml` - wykluczenie źle zbudowanego obrazu
+- CI używa tego samego Makefile'a
+- komendy składowe `make check` rozdzielone między równoległe zadania
+- po testach oznacz zbudowany obraz Dockera, wypchnij do repo, używaj w deploymentach
+
+---
+layout: two-cols
+---
+
+<template v-slot:default>
+
+# CI self-hosted runners: wolne porty
+
+```yaml
+# docker-compose.yml
+---
+version: '3'
+services:
+  api:
+    ports:
+      - "${API_PORT:-8080}:8080"
+    ...
+  database:
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    ...
+```
+</template>
+
+<template v-slot:right>
+
+<br/><br/>
+
+```python
+# get_free_port.py
+# https://unix.stackexchange.com/a/132524/128610
+
+#!/usr/bin/env python3
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind(('', 0))
+addr = s.getsockname()
+print(addr[1])
+s.close()
+```
+
+<br/>
+
+```bash
+$ export \
+  API_PORT=$(./get_free_port.py) \
+  POSTGRES_PORT=$(./get_free_port.py)
+$ make run check
+```
+
+</template>
+
+<!--
+self-hosted runners - jeśli nie ma izolacji sieci między uruchomieniami testów, to będą konflikty na portach
+Można generować losowe porty
+-->
+
+---
+layout: cover
+---
+
+# Więcej sztuczek 🪄
 
 ---
 layout: two-cols
@@ -522,46 +641,6 @@ Entr jest uniwersalny.
 
 ---
 
-# Organizacja CI
-
-- CI usuwa `docker-compose.override.yml` - na wszelki wypadek
-- CI używa tego samego Makefile'a
-- buduj obraz Dockerowy raz, wypchnij do repo
-
-TODO
-
-<!--
-So build image first, then run functional tests with it. Might be done with override, pulling the image first.
--->
-
----
-
-# Testy lokalne a CI - kompozycja poleceń w Makefile
-
-- kompozycja poleceń w Makefile
-  - TODO pokaż `make check`
-- może odpalać podkomendy równolegle w różnych stepach i ładnie je przedstawiać w CI
-
----
-
-# CI self-hosted runners: problemy z portami
-
-TODO dodaj wstrzykiwalne porty w docker-compose
-Odpalanie do
-
-Przekazanie portów przez make
-
-<!--
-- dobrze jak jest docker-in-docker w runnerach, żeby nie było konfliktów na portach;
-  w innym przypadku trzeba pokombinować, brać jakieś wolne i wstrzykiwać je w docker-compose i w inne miejsca
-  Można np zrobić override z portami.
-
-self-hosted runners - jeśli nie ma izolacji sieci między uruchomieniami testów, to będą konflikty na portach
-Można generować losowe porty
--->
-
----
-
 # Obiecany, ale pominięty materiał
 
 - debug kodu w kontenerze
@@ -585,4 +664,6 @@ Można generować losowe porty
 layout: center
 ---
 
-Fin
+# Fin
+
+# 🫠

@@ -522,23 +522,16 @@ Entr jest uniwersalny.
 
 ---
 
-# Testy lokalne a CI
+# Organizacja CI
 
 - CI usuwa `docker-compose.override.yml` - na wszelki wypadek
 - CI używa tego samego Makefile'a
-- zbuduj obraz Dockerowy, wypchnij do repo
-- self-hosted runners mogą mieć problemy z portami (do obejścia)
+- buduj obraz Dockerowy raz, wypchnij do repo
 
-TODO dodaj wstrzykiwalne porty w docker-compose
+TODO
 
 <!--
-- dobrze jak jest docker-in-docker w runnerach, żeby nie było konfliktów na portach;
-  w innym przypadku trzeba pokombinować, brać jakieś wolne i wstrzykiwać je w docker-compose i w inne miejsca
-  Można np zrobić override z portami.
-- So build image first, then run functional tests with it. Might be done with override, pulling the image first.
-
-self-hosted runners - jeśli nie ma izolacji sieci między uruchomieniami testów, to będą konflikty na portach
-Można generować losowe porty
+So build image first, then run functional tests with it. Might be done with override, pulling the image first.
 -->
 
 ---
@@ -549,7 +542,23 @@ Można generować losowe porty
   - TODO pokaż `make check`
 - może odpalać podkomendy równolegle w różnych stepach i ładnie je przedstawiać w CI
 
-TODO
+---
+
+# CI self-hosted runners: problemy z portami
+
+TODO dodaj wstrzykiwalne porty w docker-compose
+Odpalanie do
+
+Przekazanie portów przez make
+
+<!--
+- dobrze jak jest docker-in-docker w runnerach, żeby nie było konfliktów na portach;
+  w innym przypadku trzeba pokombinować, brać jakieś wolne i wstrzykiwać je w docker-compose i w inne miejsca
+  Można np zrobić override z portami.
+
+self-hosted runners - jeśli nie ma izolacji sieci między uruchomieniami testów, to będą konflikty na portach
+Można generować losowe porty
+-->
 
 ---
 

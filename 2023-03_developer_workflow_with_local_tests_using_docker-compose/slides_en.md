@@ -17,29 +17,45 @@ https://witchsoft.com
 https://bultrowicz.com
 
 <!--
-I'm Michał, I'm the Primary Software Wizard at WitchSoft, my company.
-The title is not more made up and pompous that something like "Chief Executive Officer".
+Hi! My name is Michał Bultrowicz.
+You could say I'm a holistic Python back-end developer.
+Other than app code I do the tests, infrastructure, ensure reliability, etc.
 
-In the recent past I did hollistic backends (with testing, reliability, infrastructure, etc.),
-now I'm trying to start a business providing software directly to people.
+Nowadays I'm focusing on producing my own end-user software under my own company's banner.
 
-I have twitter and everything, it's on the site.
+Today I'll talk about the developer workflow with locas tests using Docker Compose.
+-->
 
+---
+layout: center
+---
+
+Slides + notes: [https://github.com/butla/presentations](https://github.com/butla/presentations/tree/master/2023-03_developer_workflow_with_local_tests_using_docker-compose)
+
+<!--
+Slides are available in this repository. Just look for the name of this presentation there.
 -->
 
 ---
 
 # What's a container?
 
+- a process or a group of processes separated from the host's system
+- has a file system independent from the host's one
+- a bit like a Virtual Machine, but not really
+
+<!--
+Mam nadzieję, że wiecie już czym są kontenery, Docker i Docker-compose,
+ale na wszelki wypadek zrobię minimalne wprowadzenie.
+
+A short but more technical answer
+- A process or a group of processes running in a process namespace, with a separate user-space.
+- It runs on the host's kernel, in a process namespace separated from the host's processes.
 - It contains:
   - application code
   - system components (e.g. libraries) required by the app code
   - doesn't contain a Linux kernel.
-- It runs on the host's kernel, in a process namespace separated from the host's processes.
 - Windows and MacOS need a Linux VM to use containers.
-
-<!--
-The target audience knows about Docker, but I'll explain in short just in case.
 -->
 
 ---
@@ -47,234 +63,618 @@ The target audience knows about Docker, but I'll explain in short just in case.
 # Docker and Docker Compose
 
 - Docker: an implementation of containers.
-- There are more container technologies, e.g. Podman.
-- Docker Compose: describe and run set of Docker containers.
+- There are more implementations, e.g. [Podman](https://podman.io/).
+- Docker Compose: describes and manages a group of related containers.
 
 ---
 
-# Why have local tests with containers?
+# Sample application - a notes repository
 
-- higher probability that app really works vs. tests with mocks and in-memory fakes
-- faster development by enabling local experimentation
-- easier on-boarding of new team members
+<br/>
+
+[Python REST API + PostgreSQL](https://github.com/butla/experiments/tree/master/testing__quality_assurance/sample_backend_app)
+
+<br/>
+
+Endpoints API:
+- `POST /notes/` - create a note
+- `GET /notes/{id}/` - get the note by ID
+- `GET /notes/` - get all notes
 
 <!--
-What will you gain if you use the techniques from this presentation?
+Pełna przykładowa apka pod linkiem.
+Znajdziecie tam trochę więcej szczegółów niż zawarłem na prezentacji.
 
-More info when we get to specifics.
+Doesn't even have update - that bare-bones.
+-->
+
+---
+layout: two-cols
+---
+
+<template v-slot:default>
+
+# Docker Compose setup
+
+```yaml
+# docker-compose.yml
+---
+version: '3'
+services:
+  api:                # <== our app
+    build:
+      context: .
+    image: sample_backend
+    ports:
+      - "8080:8080"   # <== port config
+    links:
+      - database
+    environment:
+      - POSTGRES_HOST=database  # <==
+  database:
+    image: postgres:15.2
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:          # <== persistence
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+```
+
+</template>
+
+<template v-slot:right>
+
+<br/><br/>
+
+```dockerfile
+# Dockerfile
+FROM python:3.10-alpine
+
+EXPOSE 8080
+
+WORKDIR /app
+
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
+
+COPY sample_backend /app/sample_backend
+
+CMD ["uvicorn", "--host", "0.0.0.0",
+     "--port", "8080",
+     "sample_backend.main:app"]
+```
+
+</template>
+
+<!--
+You can see that there's not much here.
+
+The services defined. Compose will build the Dockerfile.
+
+Apka powinna mieć config ze zmiennych środowiskowych.
+Tutaj przyjmuje adres postgresa.
+To nazwa kontenera.
+
+POSTGRES_HOST w aplikacji będzie miał domyślną wartość "localhost".
+
+Mogłaby też przyjmować inne jego parametry, ale config ma defaulty, które będą działać.
+
+Postgres będzie miał persistence - trzymanie danych między restartami.
+Dzięki volumeowi.
+
+In short - what's happening in the Dockerfile.
 -->
 
 ---
 
-# The example app (TODO)
+# Running the application
 
-Python REST API backed by an SQL database.
-Requires migrations to run on the DB.
+```makefile
+# Makefile - central repository of dev commands
+.EXPORT_ALL_VARIABLES:  # useful if Makefile gets more elaborate
+SHELL:=/bin/bash  # explicit shell declaration
 
-How do I run it?
+setup_development:
+	poetry install
 
-Framework might give me some command to run it with some sqliteDB or some fake in memory thing.
-We don't want that.
+run: _start_compose _db_migration
 
-TODO NEXT slide - add Dockerfile, then docker-compose
+_start_compose:  # leading underscore disables tab-completion
+	docker-compose up -d
+
+_db_migration:
+	poetry run alembic upgrade head  # needs to be tweaked to await DB
+```
+
+- need to modify the migrations to wait for the DB to get up
+
+```bash
+$ git clone <repo>
+$ cd <repo>
+$ make setup_development run  # voilà! the local app is running
+```
 
 <!--
-Step 1: app plus database migrations - how do I run that?
+Jeśli nie lubicie Make'a, to możecie mieć jakiś inny centralny skrypt z komendami potrzebnymi w developmencie i dla CI.
 
-When using some popular framework like Django in Python, you would just write tests that use some in-memory DB,
-or SQLite.
-why is it bad to not have a real dB? you don't use the real thing. you can be surprised after you deploy, cause in reality the app will behave differently. You don't use the full power of y
-our tools. Like triggers or functions.
+Make jest spoko, bo ma shell completions i jest wszędzie.
 
-real app won't reset its database every call - your functional tests shouldn't too.
-Integration ones as well.
+What's happening in the makefile.
+
+Targety z podkreśleniami nie będą podpowiadane przez completions. Nie trzeba eksponować wszystkich komend.
+
+Odpalenie migracji może nastąpić zanim jeszcze baza będzie gotowa, stąd potrzeba czekania na nią.
+W pythonie używam tenacity. Ogólnie prosta pętla jakaś pingająca bazę.
+
+Wasze systemy nie muszą mieć bazy SQL.
+Zamiast migracji może być dowolne "zapewnienie początkowych danych" dla systemu.
+
+Jeśli wasza apka potrzebuje jakichkolwiek danych do działania, to powinny być one częścią migracji.
+(a nie, np. Django fixtures).
+
+After these commands we'll have the app running on a "clean" environment.
+-->
+
+---
+
+# What we have already
+
+- Live app running locally.
+- The ability to experiment with the code and database.
+  - Huge time-saver
+  - quality improvement
+- Very simple "getting started" instructions.
+
+<!--
+Możliwość eksperymentowania - wielki plus.
+Można zmieniać kod, patrzeć co się dzieje.
+Skraca to development, zmniejsza ryzyko bugów.
+
+Często problemem dla nowych członków zespołu jest w ogóle uruchomienie aplikacji.
+Jeśli będziemy się trzymać tej formuły będzie to proste.
+-->
+
+---
+layout: cover
+---
+
+# Time for the tests! 🦾
+
+---
+
+# Integrated tests
+
+- use internal interfaces (like unit tests)
+- use external systems (e.g. PostgreSQL in the container)
+
+```python
+def test_create_a_note():
+    # arrange
+    note_contents = f"I'm a note, wee! {uuid.uuid4()}"  # some randomness
+    notes_repo = NotesRepository(...)  # object that connects to the DB
+
+    # act
+    id = notes_repo.create(note_contents)  # calls out to Postgres at localhost:5432
+
+    # assert
+    with db_session() as session:  # test code also calls out to Postgres
+        query = select(Note).where(Note.id == id)
+        saved_object = session.execute(query).scalar()
+    assert saved_object.contents == note_contents
+```
+
+- no need for mocks
+- ...you should have more tests than that
+
+<!--
+First kind of tests that I'll be talking about.
+
+Bullets.
+
+Co się dzieje w teście.
+
+Tak wytestowany obiekt Repository można zastępować przez dependency injection w testach jednostkowych.
+-->
+
+---
+
+# External tests (aka. functional/e2e)
+
+- using **only** external interfaces (e.g. HTTP, data in DB)
+- configuration as close to production as possible
+- harder to debug, gotta look at the container logs
+
+```python
+import uuid, httpx
+
+def test_store_and_retrieve_note(app_url):  # a more elaborate scenario
+    note_contents = f"a note {uuid.uuid4()}"  # some randomness
+
+    create_result = httpx.post(f"{app_url}/notes/", json={"contents": note_contents})  # calling the app in Docker
+    assert create_result.json()["contents"] == note_contents
+    note_id = create_result.json()["id"]
+
+    get_by_id_result = httpx.get(f"{app_url}/notes/{note_id}/")
+    assert get_by_id_result.json()["contents"] == note_contents
+
+    get_all_result = httpx.get(f"{app_url}/notes/")
+    # finding the new note among all notes
+    assert next(note for note in get_all_result.json() if note["id"] == note_id)
+```
+
+<!--
+Name is something I use.
+I feel it's more precise than saying functional, or component, or end-to-end tests.
+
+Bullets.
+
+Pełny scenariusz akceptacyjny:
+- tworzymy notkę
+- pobieramy notkę po ID
+- zayważamy, że notka jest w grupie wszystkich notek
+-->
+
+---
+
+# Missing code from the previous slide
+
+```python
+import uuid, httpx, pytest, tenacity
+
+def test_store_and_retrieve_note(app_url):
+    ...
+
+# Session scope ensures we wait only once per test suite run.
+@pytest.fixture(scope="session")
+def app_url():
+    app_address = "http://localhost:8080"
+    _wait_for_http_url(app_address)
+    return app_address
+
+# Call the app until it returns correctly or times out.
+# Same technique can be used on DB migrations.
+@tenacity.retry(stop=tenacity.stop_after_delay(10), wait=tenacity.wait_fixed(0.2), reraise=True)
+def _wait_for_http_url(url: str):
+    result = httpx.get(url)
+    if result.status_code != 200:
+        raise ValueError("App returned the wrong status code")
+```
+
+<!--
+Możemy robić więcej testów.
+
+Czekanie przyda się jeśli apka wstaje wolno (lepiej tego unikać),
+lub gdy będziemy przeładowywać kod i puszczać testy przy zmianach plików.
+
+Podobne czekanie można wstrzyknąć w migracje (wcześniej mówiłem, że trzeba to do nich dodać).
+-->
+
+---
+
+# Running the tests
+
+```makefile
+SOURCES:=sample_backend tests  # source code directories for some commands
+
+check: static_checks test  # one make target to validate the code
+
+# SUBCOMMANDS =====
+test:
+	@echo === Running tests... ===
+	@poetry run pytest tests
+
+static_checks: _check_isort _check_format _check_linter _check_types
+
+_check_isort:
+	@echo === Checking import sorting... ===
+	@poetry run isort -c $(SOURCES)
+
+_check_format:
+	@echo === Checking code formatting... ===
+	@poetry run black --check $(SOURCES)
+
+...
+```
+
+<br/>
+
+```bash
+$ make check
+```
+
+---
+
+# Integrated and external tests - what do we get?
+- proof that the app turns on
+- higher confidence it's working - app layers seem to work together
+- less work than mock setups
+- freedom to use full power of the tools
+- slower than unit tests, still fast (if the app is fast)
+- ⚠️ no full isolation between tests
+
+<!--
+Większa pewność: jeśli używasz jakiś testowych zastępników od frameworka, albo np. lokalnej bazy SQLite,
+to nie wszystko będzie tak samo.
+Zawsze znajdą się jakieś corner casey.
+I coś kiedyś zaskoczy po deploymencie (pół biedy, jeśli będzie to DEV).
+
+Mocki: mniej pracy - szybsza iteracja.
+
+odblokowanie mocy - np testowanie indeksów, triggerów, itp.
+Jeśli możemy coś testować, to z większą pewnością możemy wpleść to w system.
+Większe poleganie na zewnętrznych systemach, mniej kodu przez to.
+
+Not all frameworks have tight DB integration and fakes. With this you can test everything.
+-->
+
+---
+
+# No isolation - a bit of chaos
+
+- data reset between tests might be impractical
+  - for Redis it'd be OK (but prevent test parallelization)
+  - too slow in SQL
+- some tests (e.g. get all notes) have to take that into account
+  - collections can have unpredictable elements
+  - need to build isolation into the data
+- random app issues will bug you
+
+<!--
+Tests for things like retrieving the entire collection of objects need to ensure that the new items need to
+be there, not match the whole retrieved collection.
+This technique also helps with making tests more independent of each other, so they can be run out-of-order
+(that sometimes creeps in into test-suites) and parallelised
+
+Odizolowane grupy danych - nowa organizacja.
 You have some wiggle room to configure them, though. You can be creating a new org for every test.
 You can create one, and add all the data to it. Or you can do anything in between.
+
 Maximize chaos, but allow yourself to have the precision when you need to (e.g. be able to test a clean start,
 but have the default a bit more messy and realistic).
 
-Not all frameworks have tight DB integration and fakes. With this you can test everything.
-
-Prawdziwa baza i nawarstwianie danych dają trochę chaosu, który czasem zrobi dziwny problem - tym samym symulując prawdziwy deployment
-
-Don't show the code when it's not necessary.
-Focus on the test code and ideas behind it.
-
-Ping it to demonstrate it's working. We did a basic local test now.
-Satisfy `git pull && make run` requirement.
-
-Waiting for the DB to get up in the migrations.
-
-Functional tests should wait for the app as well - tenacity.
-
-Migracje traktować ogólnie. Mało pythona.
-Migracje muszą czekać na bazę, bo to, że się odpali kontener nie znaczy, że baza jest gotowa.
-
-Buduj ją z testami od razu.
-Pokaż odpalanie jedną komendą
-Pokaż przykłady jednostkowych, zintegrowanych, external (na cały feature).
-
-This minimal app - how would you check that it's working? Just run it.
-Ok, let's write down the command to do it.
-Now everybody will be able to run it.
-
-Stopniowo przechodź przez wszystkie obiecane tematy.
+Może dodatkowy slajd o tym, jak sobie z tym radzić:
+- Czekanie na rzeczy asynchroniczne.
+- założenie, że nowe elementy kolekcji mogą się pojawiać w dowolnym momencie
 -->
 
 ---
 
-# Interactive app setup
+# A bit of chaos - more realism
 
-Not being able to play with the app is a huge detriment.
-You will have more bugs, longer development time.
-
-At least have something somewhere running that people can change and observe.
-Best if it's local and doesn't need Internet connectivity.
-
----
-
-# Local vs. remote test setup
-
-Best thing is a local setup, without the need for internet even (working on the train can be quite effective).
-Some dev instance (or spawnable instances, maybe with Helm) is good.
-Anything that the developer can change and observe.
-But local ones are the easiest/fastest to work with. And cheapest :)
-
----
-
-# Podział testów
-
-- unit - klasyczne testy jednostkowe
-- integrated - używanie wewnętrznych interfejsów kodu w połączeniu z zewnętrznymi systemami;
-  np. klasa repozytorium + prawdziwa baza danych)
-- external - cały artefakt, konfiguracja produkcyjna albo tak blisko tej konfiguracji jak się da
-
-TODO - link do artykułu
-
----
-
-# Techniques to show (NOT A SLIDE)
-
-Techniques:
-- organizing the project so that a local instance of the app can be run with two commands: `git clone && make run`
-  - compose/config env vars
-- separation of unit, integrated, and functional tests (explain them)
-- not resetting the test environment between tests
-- local and CI test parity
-  - overridey w dockerze? coś było z nimi
-  - CI też odpala makefile
-- debugging code running in containers
-  - podpięcie się ręczne
-  - podpięcie się z Pycharmem
-- using "Docker mounts" to enable fast application reloading while editing code
-- changes to the production code that make testing easier (configurable wait times, launching coverage)
-
-- test code is outside of the container (additional)
-- async tests, waiting for stuff (additional)
-- destructive/non-destructive docker-compose tests (additional);
-  non-destructive run with xdist before the destructive tests are run;
-  mark destructive ones with pytest-mark;
-  destructive example: graceful app shutdown
+- production app doesn't wipe the data all the time
+- catching bugs before production:
+  - local DB keeps growing
+  - "flaky" tests point out race conditions
+- fixing the "random app issues" increases quality
+- if you can't take it at the time: `docker-compose down -v`
 
 <!--
-### Single command to run the app locally
-Aplikacja też powinna być budowana do dockera.
+Prawdziwa baza i nawarstwianie danych dają trochę chaosu,
+który czasem zrobi dziwny problem - tym samym symulując prawdziwe środowisko
 
-### Shortly about functional and integrated tests
-
-Sometimes the code's so simple that it won't need unit tests, though.
-
-Unit/integrated/external test directories.
-
-
-### using real local DBs in tests
-not fakes provided by frameworks, like in Django.
-Testy są dużo bardziej realistyczne w takim przypadku.
-Pozwala używać i sprawdzać więcej funkcji bazy danych / data store'a, np. triggery, indexy, itp.
-
-It's good to have some layer of abstraction so that not all tests require a DB.
-I don't know what frameworks you use, but Django is awful in that aspect - it encourages using ORM objects a lot,
-because tests will magically work in memory.
-
-### Local dev tests and CI test parity
-CI can run ones integrated with other apps.
-
-You can use tools like pre-commit locally. I just use Makefiles.
-
-CI - would be best if the image we'll be using is the same that will be pushed out.
-So build image first, then run functional tests with it.
-
-### test code is outside of the container
-App configs for different kinds of tests (functional in docker, integrated in localhost).
-Wartości configów (jak adres bazy) pod testy integracyjne (łączymy się z localhosta) i funkcjonalne
-(łączymy się z kontenera).
-
-Można też testy wsadzać w kontener, ale ja tego nie robię.
-
-### No full setup/teardown
-
-More like tests against a deployed app.
-
-Makes the app and the tests more robust. The code needs to handle real issues.
-
-With full setup all the time it takes a long time.
-
-### docker mounts for code reloading
-Pierwszy krok to mounty i restartowanie.
-
-Drugi to live reload. Frameworki mogą mieć takie opcje - pokaż z FastAPI.
-Tutaj też pokaż overloading domyślnego polecenia w compose dla potrzeb developmentu.
-Ale przydałoby się mieć jakieś testy z domyślnym poleceniem. Może jakieś testy mogą wyłączać polecenie z compose.
-Albo może ono być w lokalnym override, którego nie będzie w CI.
-Tradeoffy co do parity.
-
-Możecie też używać jakiś live-reload frameworków, albo czegoś takiego jak `entr` w poleceniu dockera.
-Nie dawałbym live reload w wersji produkcyjnej, tylko.
-
-### Async tests
-
-If you're doing real calls you might need to wait for results.
+Realism: real app won't reset its database after every operationevery call - your functional tests shouldn't too.
+Integration ones as well.
 
 Many flaky tests showed me real race conditions.
 
-Use retrying decorators (like tenacity) liberally in tests.
+A volume in docker-compose needed for persistence;
+if you get weird issues and can't figure them out, try docker-compose down -v to clear out everything.
+But remember - maybe that issue can happen in production? Although local instances have a lot of garbage data.
+-->
 
-You might wanna tune the configs in tests
+---
 
-### Code changes that help with tests
+# Organizing the tests
 
-E.g. coverage hooks, additional endpoints behind feature flags, synchronization points.
-Dodawanie jakiś testowych endpointów do kodu - też OK. Można je chować za jakąś opcją (feature flags).
+```
+project_root/
+├── ...
+└── tests
+    ├── external
+    │   └── ...
+    ├── integrated
+    │   └── ...
+    └── unit
+        └── ...
+```
 
-100% coverage without overuse of mocks is possible.
+<br/>
 
-Test-enabling code can be a part of the product. Testability is a feature.
+- explicit separation
+  - numbers of high-level tests need to be controlled
+- running faster test subgroups is easy
+- [more info about the 3 kinds of tests](https://bultrowicz.com/separating_kinds_of_tests/)
 
-### Additional things
-**Fast docker builds** with sensible command sorting - install dependencies (use caches), then add your code.
 
-**Design your code with testability in mind.**
-You can chunk up the code better then.
-Take care of more things with unit tests. So that integrated and functional tests will not multiply too much.
-Separation of concerns is important.
+<!--
+It makes the team mindful about the category that each test falls under.
 
-**Guerilla testing**
+We need to be mindful of the categories, because the higher levels of tests are more time-consuming.
+When you need to make the test suite faster, the starting point can be looking at the higher level tests and checking
+whether they can't be replaced with lower level tests.
 
-Some patterns (like ORM because it lets you test the DB code without a real DB) become less appealing, as well.
-Show the tests with triggers. Why bother? Locking is good, etc.
+A test should be the lowest level that fulfills the job.
+If you can check what you want about the code without poking a database, then do it
+(meaning write a unit test instead of an integrated test).
+-->
 
-If you can reliably test more. You can really treat external apps as part of your app. Like DBs. Or Redis.
+---
 
-**Centralize your logs?**
-Talk about logs in the context of debugging?
+# This works for complex applications
 
-### Localstack
-Only for AWS.
+- battle-tested at 3 companies
+- can integrate many systems (Kafka, Redis, RabbitMQ, etc.)
+  - just need Docker images
+- AWS locally - [Localstack](https://localstack.cloud/)
+  - weaker tools for GCP and Azure
+- faking other REST APIs - [Mountebank](http://www.mbtest.org/)
+  - check out [mountepy](https://github.com/butla/mountepy)
+
+<!--
+Localstack only for AWS.
 Azure has some local emulation https://learn.microsoft.com/en-us/answers/questions/579764/local-development-with-azure-services-specifically
 
 GCP has [some emulators](https://cloud.google.com/sdk/gcloud/reference/beta/emulators)
 and it looks like the code using the [functions framework](https://cloud.google.com/functions/docs/functions-framework)
 can run locally.
-
-### Mountebank
 -->
+
+---
+layout: two-cols
+---
+
+<template v-slot:default>
+
+# Reloading the app code in the container
+
+```yaml
+# docker-compose.override.yml
+---
+version: '3'
+
+services:
+
+  api:
+    volumes:
+      # local folder mounted into the container
+      - ./sample_backend/:/app/sample_backend/
+```
+
+```makefile
+# Makefile
+run_reloading: run
+	fd --exclude .git --no-ignore '\.py$$' sample_backend \
+		| entr -c make _start_compose
+
+test_reloading:
+	fd --exclude .git --no-ignore '\.py$$' \
+		| entr -c make test
+```
+
+</template>
+
+<template v-slot:right>
+
+<br/><br/>
+
+- no need to rebuild Docker image
+- app in Docker restarts on any code change
+- [entr](https://bultrowicz.com/universal_reload_with_entr/)
+- [fd](https://github.com/sharkdp/fd)
+
+</template>
+
+<!--
+Zamiast entr dla przeładowywania aplikacji można użyć czegoś innego.
+Instead of entr for reloading, you can use something else.
+Frameworks often have reload option.
+-->
+
+
+---
+layout: cover
+---
+
+# Continuos Integration / Delivery
+
+---
+
+# Organizing CI
+
+- CI removes `docker-compose.override.yml` - prevent bad images
+- CI uses the same Makefile
+- subcommands of `make check` made into parallel tasks
+- after checks succeed:
+  - tag the built app image
+  - push it out to a repo
+  - use in deployments
+
+---
+layout: two-cols
+---
+
+<template v-slot:default>
+
+# CI self-hosted runners: free ports problem
+
+```yaml
+# docker-compose.yml
+---
+version: '3'
+services:
+  api:
+    ports:
+      - "${API_PORT:-8080}:8080"
+    ...
+  database:
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    ...
+```
+</template>
+
+<template v-slot:right>
+
+<br/><br/>
+
+```python
+# get_free_port.py
+# https://unix.stackexchange.com/a/132524/128610
+
+#!/usr/bin/env python3
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind(('', 0))
+addr = s.getsockname()
+print(addr[1])
+s.close()
+```
+
+<br/>
+
+```bash
+$ export \
+  API_PORT=$(./get_free_port.py) \
+  POSTGRES_PORT=$(./get_free_port.py)
+$ make run check
+```
+
+</template>
+
+<!--
+self-hosted runners - if there's no isolation between the networks for test runs, ports will conflict.
+
+Get random free ports.
+-->
+
+---
+
+# Promised, but skimmed over material
+
+- debug code in the container
+  - [CLI](https://github.com/butla/bultrowicz.com/blob/b7e0d8379b37f77efa4669857c8d88f6124c3c95/unfinished_articles/debugging_python_in_docker_with_cli.rst)
+  - IDE, e.g. [Intellij/Pycharm](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html#run)
+- changes to production code for improved testability
+  - every sleep in the app is configurable, now values for tests
+  - it's OK to add app features to increase testability
+    - testability is an useful feature of the product
+  - ...others...
+
+<!--
+- launching coverage
+- if you can't implement some needed tests without changing the code, then change the code.
+  Add a special endpoint, or whatever.
+  You might want to hide them behind a feature flag. Or maybe not - testing in production has its place.
+-->
+
+---
+layout: center
+---
+
+# Fin
+
+# 🫠

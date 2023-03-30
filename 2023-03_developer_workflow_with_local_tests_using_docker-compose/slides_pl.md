@@ -18,8 +18,7 @@ https://bultrowicz.com
 
 <!--
 Cześć, nazywam się Michał Bultrowicz.
-Rozkręcam swoją firmę.
-Wcześniej budowałem backendy dla innych, razem z testami, infrastrukturą, metrykami, alertami, itp.
+Opowiem dziś o tym jak lokalne testy z docker-compose wpływają na pracę programisty.
 
 (other version)
 
@@ -48,7 +47,8 @@ Slajdy + notatki: [https://github.com/butla/presentations](https://github.com/bu
 - trochę jak VM, ale nie do końca
 
 <!--
-Mam nadzieję, że wiecie już czym są kontenery, ale na wszelki wypadek dam minimalne wprowadzenie.
+Mam nadzieję, że wiecie już czym są kontenery, Docker i Docker-compose,
+ale na wszelki wypadek zrobię minimalne wprowadzenie.
 
 A short but more technical answer
 - A process or a group of processes running in a process namespace, with a separate user-space.
@@ -68,10 +68,6 @@ A short but more technical answer
 - Jest więcej implementacji, np. [Podman](https://podman.io/).
 - Docker Compose: pozwala opisać i zarządzać grupą powiązanych kontenerów.
 
-<!--
-Again, I hope you already know this, but this is a bare-bones explanation.
--->
-
 ---
 
 # Przykładowa aplikacja - repozytorium notatek
@@ -88,12 +84,10 @@ Endpointy API:
 - `GET /notes/` - pobierz wszystkie notki
 
 <!--
-Apka moja pod linkiem. Znajdziecie tam trochę więcej szczegółów niż zawarłem na prezentacji.
+Pełna przykładowa apka pod linkiem.
+Znajdziecie tam trochę więcej szczegółów niż zawarłem na prezentacji.
 
 Doesn't even have update - that bare-bones.
-
-TODO: mermaid diagram with images?
-https://github.com/mermaid-js/mermaid/issues/548
 -->
 
 ---
@@ -191,7 +185,12 @@ _db_migration:
 ```
 
 - modyfikacja migracji, aby czekały na pojawienie się bazy
-- `git clone <repo> && cd <repo> && make setup_development run`
+
+```bash
+$ git clone <repo>
+$ cd <repo>
+$ make setup_development run
+```
 
 <!--
 Jeśli nie lubicie Make'a, to możecie mieć jakiś inny centralny skrypt z komendami potrzebnymi w developmencie.
@@ -474,6 +473,8 @@ project_root/
 - jawny podział
 - ilość wysokopoziomowych testów trzeba kontrolować
 - łatwość puszczania szybszych podgrup
+- więcej informacji o typach testów [tutaj](https://bultrowicz.com/separating_kinds_of_tests/)
+
 
 <!--
 It makes the team mindful about the category that each test falls under.
@@ -507,6 +508,59 @@ GCP has [some emulators](https://cloud.google.com/sdk/gcloud/reference/beta/emul
 and it looks like the code using the [functions framework](https://cloud.google.com/functions/docs/functions-framework)
 can run locally.
 -->
+
+---
+layout: two-cols
+---
+
+<template v-slot:default>
+
+# Przeładowywanie kodu w kontenerze
+
+```yaml
+# docker-compose.override.yml
+---
+version: '3'
+
+services:
+
+  api:
+    volumes:
+      # local folder mounted into the container
+      - ./sample_backend/:/app/sample_backend/
+```
+
+```makefile
+# Makefile
+run_reloading: run
+	fd --exclude .git --no-ignore '\.py$$' sample_backend \
+		| entr -c make _start_compose
+
+test_reloading:
+	fd --exclude .git --no-ignore '\.py$$' \
+		| entr -c make test
+```
+
+</template>
+
+<template v-slot:right>
+
+<br/><br/>
+
+- nie trzeba przebudowywać Dockera
+- aplikacja w Dockerze odświeża się przy zmianie pliku
+- [entr](https://bultrowicz.com/universal_reload_with_entr/)
+- [fd](https://github.com/sharkdp/fd)
+
+</template>
+
+<!--
+Zamiast entr dla przeładowywania aplikacji można użyć czegoś innego.
+Wiele frameworków ma opcję reload.
+
+Entr jest uniwersalny.
+-->
+
 
 ---
 layout: cover
@@ -579,64 +633,6 @@ $ make run check
 <!--
 self-hosted runners - jeśli nie ma izolacji sieci między uruchomieniami testów, to będą konflikty na portach
 Można generować losowe porty
--->
-
----
-layout: cover
----
-
-# Więcej sztuczek 🪄
-
----
-layout: two-cols
----
-
-<template v-slot:default>
-
-# Przeładowywanie kodu w kontenerze
-
-```yaml
-# docker-compose.override.yml
----
-version: '3'
-
-services:
-
-  api:
-    volumes:
-      # local folder mounted into the container
-      - ./sample_backend/:/app/sample_backend/
-```
-
-```makefile
-# Makefile
-run_reloading: run
-	fd --exclude .git --no-ignore '\.py$$' sample_backend \
-		| entr -c make _start_compose
-
-test_reloading:
-	fd --exclude .git --no-ignore '\.py$$' \
-		| entr -c make test
-```
-
-</template>
-
-<template v-slot:right>
-
-<br/><br/>
-
-- nie trzeba przebudowywać Dockera
-- aplikacja w Dockerze odświeża się przy zmianie pliku
-- [entr](https://bultrowicz.com/universal_reload_with_entr/)
-- [fd](https://github.com/sharkdp/fd)
-
-</template>
-
-<!--
-Zamiast entr dla przeładowywania aplikacji można użyć czegoś innego.
-Wiele frameworków ma opcję reload.
-
-Entr jest uniwersalny.
 -->
 
 ---

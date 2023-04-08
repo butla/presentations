@@ -659,7 +659,7 @@ Get random free ports.
   - [CLI](https://github.com/butla/bultrowicz.com/blob/b7e0d8379b37f77efa4669857c8d88f6124c3c95/unfinished_articles/debugging_python_in_docker_with_cli.rst)
   - IDE, e.g. [Intellij/Pycharm](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html#run)
 - changes to production code for improved testability
-  - every sleep in the app is configurable, now values for tests
+  - every sleep in the app is configurable, low values for tests
   - it's OK to add app features to increase testability
     - testability is an useful feature of the product
   - ...others...

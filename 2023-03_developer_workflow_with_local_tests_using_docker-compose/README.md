@@ -5,7 +5,9 @@ A presentation available in English and Polish.
 
 Polish title: Lokalne testy z docker-compose a praca programisty
 
-TODO links to the article and video
+Video links:
+- [English](https://youtu.be/hjve48cYj_U)
+- [Polish](https://youtu.be/Ob-3YNgXYZc)
 
 
 ## Abstract
